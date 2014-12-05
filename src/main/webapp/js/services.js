@@ -16,7 +16,6 @@ services.factory('UserService', function ($resource) {
   };
   */
 
-
     return $resource('rest/user/:action', {},
             {
                 authenticate: {

@@ -1,7 +1,12 @@
 'use strict';
 
-angular.module('openNaaSApp', ['ngResource', 'ngRoute', 'ngCookies', 'openNaaSApp.services'])
-        .config(
+angular.module('openNaaSApp', ['ngResource', 'ngRoute', 'ngCookies', 'openNaaSApp.services', 'LocalStorageModule'])
+        .config(function (localStorageServiceProvider) {
+            localStorageServiceProvider
+                .setPrefix('openNaaSApp')
+                .setStorageType('sessionStorage')
+                .setNotify(true, true)
+        }).config(
                 ['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 
                         $routeProvider
@@ -19,7 +24,7 @@ angular.module('openNaaSApp', ['ngResource', 'ngRoute', 'ngCookies', 'openNaaSAp
                                 })
                                 .when('/about', {
                                     templateUrl: 'partials/about.html',
-                                    controller: 'AboutCtrl'
+                                    controller: 'AboutCtrl',
                                 })
                                 .when('/users', {
                                     templateUrl: 'partials/users.html',
