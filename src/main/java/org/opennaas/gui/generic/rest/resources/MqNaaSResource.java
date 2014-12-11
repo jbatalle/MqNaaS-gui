@@ -46,6 +46,7 @@ public class MqNaaSResource {
         logger.info("URI: "+(String) request.getAttribute("uri"));
         HttpServletRequest req = (HttpServletRequest)request;
         request.setAttribute("uri", req.getRequestURI().substring(req.getContextPath().length()));
+        request.setAttribute("path", request.getPathInfo());
                      // Forward filtered requests to MyProxy servlet
          request.getRequestDispatcher("/ProxyServlet").forward(request, response);            
         
