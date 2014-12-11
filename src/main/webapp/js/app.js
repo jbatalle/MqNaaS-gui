@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('openNaaSApp', ['ngResource', 'ngRoute', 'ngCookies', 'openNaaSApp.services', 'LocalStorageModule'])
+angular.module('openNaaSApp', ['ngResource', 'ngRoute', 'ngCookies', 'openNaaSApp.services', 'LocalStorageModule', 'cb.x2js'])
         .config(function (localStorageServiceProvider) {
             localStorageServiceProvider
                 .setPrefix('openNaaSApp')
@@ -29,6 +29,10 @@ angular.module('openNaaSApp', ['ngResource', 'ngRoute', 'ngCookies', 'openNaaSAp
                                 .when('/users', {
                                     templateUrl: 'partials/users.html',
                                     controller: 'UsersController'
+                                })
+                                .when('/testMq', {
+                                    templateUrl: 'partials/testmq.html',
+                                    controller: 'TestMqController'
                                 })
                                 .otherwise({
                                     templateUrl: 'partials/index.html',
