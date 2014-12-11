@@ -5,15 +5,13 @@ import com.sun.jersey.api.client.ClientHandlerException;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.core.MediaType;
 import org.apache.log4j.Logger;
-import org.springframework.http.HttpRequest;
 
 /**
  * @author Josep Batallé (josep.batalle@i2cat.net)
  * TODO: 
  * Generic Jersey Service Redirect/proxy
- * Unused
+ * Unused - TO REMOVE
  */
 public class JerseyClient extends GenericRestService {
 

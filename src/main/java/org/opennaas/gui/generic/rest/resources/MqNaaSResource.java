@@ -1,9 +1,6 @@
 package org.opennaas.gui.generic.rest.resources;
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,9 +10,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.map.JsonMappingException;
-import org.opennaas.gui.generic.services.JerseyClient;
 import org.opennaas.gui.generic.services.RestServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,8 +24,8 @@ public class MqNaaSResource {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired
-    protected JerseyClient clientJersey;
+//    @Autowired
+//    protected JerseyClient clientJersey;
    
     @GET
     @Produces(MediaType.APPLICATION_XML)
