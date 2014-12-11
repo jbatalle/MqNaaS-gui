@@ -26,45 +26,45 @@ public class MqNaaSResource {
 
 //    @Autowired
 //    protected JerseyClient clientJersey;
-   
     @GET
     @Produces(MediaType.APPLICATION_XML)
     @Path("{path}")
-    public @ResponseBody void get(@PathParam("path") String path, @Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, RestServiceException, ServletException {
+    public @ResponseBody
+    void get(@PathParam("path") String path, @Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, RestServiceException, ServletException {
         this.logger.info("GET() " + path);
         String url = "http://admin:123456@localhost:9000/mqnaas/IRootResourceProvider";
 //response.sendRedirect("http://admin:123456@localhost:9000/mqnaas/IRootResourceProvider");
 //        response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
 //response.setHeader("Location", "http://admin:123456@localhost:9000/mqnaas/IRootResourceProvider");
 //response.flushBuffer();
-        logger.info("URI: "+(String) request.getAttribute("uri"));
-        HttpServletRequest req = (HttpServletRequest)request;
+        logger.info("URI: " + (String) request.getAttribute("uri"));
+        HttpServletRequest req = (HttpServletRequest) request;
         request.setAttribute("uri", req.getRequestURI().substring(req.getContextPath().length()));
         request.setAttribute("path", request.getPathInfo());
-                     // Forward filtered requests to MyProxy servlet
-         request.getRequestDispatcher("/ProxyServlet").forward(request, response);            
-        
-return;
-/*        logger.error(request.getContextPath());
-        logger.error(request.getPathInfo());
-        logger.error(request.getQueryString());
-        logger.error(request.getServletPath());
-        logger.error(request.getRequestURI());
-        logger.error(request.getRequestURL().toString());
-        Enumeration hed = request.getHeaderNames();
-        while(hed.hasMoreElements()){
-            String keyHeader = (String) hed.nextElement();
-            logger.error(keyHeader);
-            Enumeration headerValues = request.getHeaders(keyHeader);
-            while(headerValues.hasMoreElements()){
-                String valueHeader = (String) headerValues.nextElement();
-                logger.error(valueHeader);
-            }
-            List headerValuesList=Collections.list(headerValues);
-        }
+        // Forward filtered requests to MyProxy servlet
+        request.getRequestDispatcher("/ProxyServlet").forward(request, response);
 
-        String response2 = clientJersey.get(path, request);
-        */
+        return;
+        /*        logger.error(request.getContextPath());
+         logger.error(request.getPathInfo());
+         logger.error(request.getQueryString());
+         logger.error(request.getServletPath());
+         logger.error(request.getRequestURI());
+         logger.error(request.getRequestURL().toString());
+         Enumeration hed = request.getHeaderNames();
+         while(hed.hasMoreElements()){
+         String keyHeader = (String) hed.nextElement();
+         logger.error(keyHeader);
+         Enumeration headerValues = request.getHeaders(keyHeader);
+         while(headerValues.hasMoreElements()){
+         String valueHeader = (String) headerValues.nextElement();
+         logger.error(valueHeader);
+         }
+         List headerValuesList=Collections.list(headerValues);
+         }
+
+         String response2 = clientJersey.get(path, request);
+         */
         //HttpHeaders hH = req.getHeaders();
 //        List<org.springframework.http.MediaType> accept = hH.getAccept();
 //        org.springframework.http.MediaType contentType = hH.getContentType();
@@ -73,15 +73,15 @@ return;
         //return response2;
     }
     /*
-    @POST
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    @Path("{path}")
-    public String post(@PathParam("path") String path, HttpRequest req) throws JsonGenerationException, JsonMappingException, IOException, RestServiceException {
-        this.logger.info("GET() " + path);
-        logger.info("GET METHOD...");
-        logger.info(path);
-        String response = clientJersey.get(path, req);
-        return response;
-    }*/
+     @POST
+     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+     @Path("{path}")
+     public String post(@PathParam("path") String path, HttpRequest req) throws JsonGenerationException, JsonMappingException, IOException, RestServiceException {
+     this.logger.info("GET() " + path);
+     logger.info("GET METHOD...");
+     logger.info(path);
+     String response = clientJersey.get(path, req);
+     return response;
+     }*/
 }

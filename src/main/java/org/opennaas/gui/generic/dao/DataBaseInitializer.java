@@ -1,55 +1,42 @@
 package org.opennaas.gui.generic.dao;
 
-import java.util.Date;
-
 import org.opennaas.gui.generic.dao.newsentry.NewsEntryDao;
 import org.opennaas.gui.generic.dao.user.UserDao;
-import org.opennaas.gui.generic.entity.NewsEntry;
 import org.opennaas.gui.generic.entity.User;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
-
 
 /**
  * Initialize the database with some test entries.
- * 
+ *
  * @author Philip W. Sorst <philip@sorst.net>
  */
-public class DataBaseInitializer
-{
+public class DataBaseInitializer {
 
-	private NewsEntryDao newsEntryDao;
+    private NewsEntryDao newsEntryDao;
 
-	private UserDao userDao;
+    private UserDao userDao;
 
-	private PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
+    protected DataBaseInitializer() {
+        /* Default constructor for reflection instantiation */
+    }
 
-	protected DataBaseInitializer()
-	{
-		/* Default constructor for reflection instantiation */
-	}
+    public DataBaseInitializer(UserDao userDao, NewsEntryDao newsEntryDao, PasswordEncoder passwordEncoder) {
+        this.userDao = userDao;
+        this.newsEntryDao = newsEntryDao;
+        this.passwordEncoder = passwordEncoder;
+    }
 
+    public void initDataBase() {
+        User userUser = new User("user", this.passwordEncoder.encode("user"));
+        userUser.addRole("user");
+        this.userDao.save(userUser);
 
-	public DataBaseInitializer(UserDao userDao, NewsEntryDao newsEntryDao, PasswordEncoder passwordEncoder)
-	{
-		this.userDao = userDao;
-		this.newsEntryDao = newsEntryDao;
-		this.passwordEncoder = passwordEncoder;
-	}
+        User adminUser = new User("admin", this.passwordEncoder.encode("admin"));
+        adminUser.addRole("user");
+        adminUser.addRole("admin");
+        this.userDao.save(adminUser);
 
-
-	public void initDataBase()
-	{
-		User userUser = new User("user", this.passwordEncoder.encode("user"));
-		userUser.addRole("user");
-		this.userDao.save(userUser);
-
-		User adminUser = new User("admin", this.passwordEncoder.encode("admin"));
-		adminUser.addRole("user");
-		adminUser.addRole("admin");
-		this.userDao.save(adminUser);
-
-	}
-
+    }
 }

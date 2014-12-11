@@ -9,7 +9,6 @@ import org.opennaas.gui.generic.entity.NewsEntry;
  * 
  * @author Philip W. Sorst <philip@sorst.net>
  */
-public interface NewsEntryDao extends Dao<NewsEntry, Long>
-{
+public interface NewsEntryDao extends Dao<NewsEntry, Long>{
 
 }

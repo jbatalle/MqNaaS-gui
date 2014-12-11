@@ -32,6 +32,7 @@
         <security:intercept-url method="PUT" pattern="/rest/mqnaas/**" access="permitAll" />
         <security:intercept-url method="POST" pattern="/rest/mqnaas/**" access="permitAll" />
         <security:intercept-url method="DELETE" pattern="/rest/mqnaas/**" access="permitAll" />
+        <security:intercept-url method="GET" pattern="/rest/user/**" access="hasRole('user')" />
 <!--        <security:intercept-url method="GET" pattern="/rest/mqnaas/**" access="hasRole('user')" />-->
 <!--        <security:intercept-url method="DELETE" pattern="/rest/mqnaas/**" access="hasRole('admin')" />-->
     </security:http>

@@ -1,20 +1,15 @@
 package org.opennaas.gui.generic.transfer;
 
-public class TokenTransfer
-{
+public class TokenTransfer {
 
-	private final String token;
+    private final String token;
 
+    public TokenTransfer(String token) {
+        this.token = token;
+    }
 
-	public TokenTransfer(String token)
-	{
-		this.token = token;
-	}
-
-
-	public String getToken()
-	{
-		return this.token;
-	}
+    public String getToken() {
+        return this.token;
+    }
 
 }

@@ -4,19 +4,14 @@ import java.util.List;
 
 import org.opennaas.gui.generic.entity.Entity;
 
+public interface Dao<T extends Entity, I> {
 
-public interface Dao<T extends Entity, I>
-{
+    List<T> findAll();
 
-	List<T> findAll();
+    T find(I id);
 
+    T save(T newsEntry);
 
-	T find(I id);
-
-
-	T save(T newsEntry);
-
-
-	void delete(I id);
+    void delete(I id);
 
 }
