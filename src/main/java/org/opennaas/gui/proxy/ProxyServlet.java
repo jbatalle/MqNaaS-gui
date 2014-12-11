@@ -13,6 +13,8 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -22,6 +24,7 @@ public class ProxyServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     private final String USER_AGENT = "Mozilla/5.0";
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public ProxyServlet() {
         super();
@@ -30,7 +33,7 @@ public class ProxyServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //  Create Get request dynamically to remote server
         String url = "http://ipaddress:port/contextpath" + request.getAttribute("uri") + "?" + request.getQueryString();
-        url = "http://admin:123456@localhost:9000/mqnaas/"+request.getAttribute("uri");
+        url = "http://admin:123456@localhost:9000"+request.getAttribute("path");//recevie /mqnaas/IRootResourceProvider
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 

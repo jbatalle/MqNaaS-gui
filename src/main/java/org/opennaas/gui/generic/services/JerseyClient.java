@@ -13,6 +13,7 @@ import org.springframework.http.HttpRequest;
  * @author Josep Batallé (josep.batalle@i2cat.net)
  * TODO: 
  * Generic Jersey Service Redirect/proxy
+ * Unused
  */
 public class JerseyClient extends GenericRestService {
 
