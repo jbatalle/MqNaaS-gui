@@ -52,4 +52,21 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
     
+    <filter>
+    <display-name>ProxyFilter</display-name>
+    <filter-name>ProxyFilter</filter-name>
+    <filter-class>org.opennaas.gui.proxy.ProxyFilter</filter-class>
+  </filter>
+  
+  <servlet>
+    <description></description>
+    <display-name>ProxyServlet</display-name>
+    <servlet-name>ProxyServlet</servlet-name>
+    <servlet-class>org.opennaas.gui.proxy.ProxyServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProxyServlet</servlet-name>
+    <url-pattern>/ProxyServlet</url-pattern>
+  </servlet-mapping>
+    
 </web-app>
