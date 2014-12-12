@@ -5,3 +5,5 @@
 
 nb-configuration.xml
 src/main/webapp/bower_components/
+node_modules/
+npm-debug.log

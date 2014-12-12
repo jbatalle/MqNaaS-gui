@@ -33,3 +33,14 @@ mvn -Djetty.port=9999 jetty:run
 Integrate:
 https://bitbucket.org/infinit-group/cvdb/overview
 https://github.com/ppp21/spring-websockets.git
+
+
+Installation
+-------
+Javascript dependencies:
+$ npm install bower --save-dev
+For tests: 
+Install Karma:
+$ npm install karma --save-dev
+# Install plugins that your project needs:
+$ npm install karma-jasmine karma-chrome-launcher --save-dev
