@@ -7,7 +7,7 @@ TODO
 
 #### Backend
 * Remove JerseyClient
-* Remove newEntrys used for 'news'
+* Remove newEntrys used for 'news' **Done**
 * Create history (log)
 * Messages
 

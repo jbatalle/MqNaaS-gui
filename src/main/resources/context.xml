@@ -39,13 +39,11 @@
         <property name="entityManagerFactory" ref="entityManagerFactory" />
     </bean>
 	
-    <bean id="newsEntryDao" class="org.opennaas.gui.dao.newsentry.JpaNewsEntryDao"></bean>
     <bean id="historyEntryDao" class="org.opennaas.gui.dao.history.JpaHistoryEntryDao"></bean>
     <bean id="userDao" class="org.opennaas.gui.dao.user.JpaUserDao"></bean>
 	
     <bean id="dataBaseInitializer" class="org.opennaas.gui.dao.DataBaseInitializer" init-method="initDataBase">
         <constructor-arg ref="userDao" />
-        <constructor-arg ref="newsEntryDao" />
         <constructor-arg ref="passwordEncoder" />
     </bean>
 

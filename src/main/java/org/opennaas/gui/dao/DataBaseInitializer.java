@@ -1,6 +1,6 @@
 package org.opennaas.gui.dao;
 
-import org.opennaas.gui.dao.newsentry.NewsEntryDao;
+import org.opennaas.gui.dao.history.HistoryEntryDao;
 import org.opennaas.gui.dao.user.UserDao;
 import org.opennaas.gui.entity.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,7 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  */
 public class DataBaseInitializer {
 
-    private NewsEntryDao newsEntryDao;
+    private HistoryEntryDao historyEntryDao;
 
     private UserDao userDao;
 
@@ -22,9 +22,9 @@ public class DataBaseInitializer {
         /* Default constructor for reflection instantiation */
     }
 
-    public DataBaseInitializer(UserDao userDao, NewsEntryDao newsEntryDao, PasswordEncoder passwordEncoder) {
+    public DataBaseInitializer(UserDao userDao, HistoryEntryDao historyEntryDao, PasswordEncoder passwordEncoder) {
         this.userDao = userDao;
-        this.newsEntryDao = newsEntryDao;
+        this.historyEntryDao = historyEntryDao;
         this.passwordEncoder = passwordEncoder;
     }
 
