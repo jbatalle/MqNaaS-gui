@@ -1,5 +1,5 @@
 
-var services = angular.module('openNaaSApp.services', ['ngResource']);
+//var services = angular.module('openNaaSApp.services', ['ngResource']);
 
 services.factory('UserService', function ($resource) {
     /*
@@ -29,7 +29,7 @@ services.factory('UserService', function ($resource) {
         .factory('NewsService', function ($resource) {
 
             return $resource('rest/news/:id', {id: '@id'});
-        })
+        })/*
         .factory('HistoryService', function ($resource) {
 
             return $resource('rest/history/:id', {id: '@id'});
@@ -49,4 +49,5 @@ services.factory('UserService', function ($resource) {
                         return promise;
                     }
                 }
-            }]);
+            }])*/
+            ;

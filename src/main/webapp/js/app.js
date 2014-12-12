@@ -167,3 +167,5 @@ function CreateController($scope, $location, NewsService) {
 }
 ;
 
+
+var services = angular.module('openNaaSApp.services', ['ngResource']);
