@@ -1,4 +1,4 @@
-package org.opennaas.gui.generic.rest.resources;
+package org.opennaas.gui.rest.resources;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -10,7 +10,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import org.opennaas.gui.generic.services.RestServiceException;
+import org.opennaas.gui.services.RestServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

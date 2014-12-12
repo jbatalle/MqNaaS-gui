@@ -37,9 +37,9 @@
 <!--        <security:intercept-url method="DELETE" pattern="/rest/mqnaas/**" access="hasRole('admin')" />-->
     </security:http>
 
-    <bean id="unauthorizedEntryPoint" class="org.opennaas.gui.generic.rest.UnauthorizedEntryPoint" />
+    <bean id="unauthorizedEntryPoint" class="org.opennaas.gui.rest.UnauthorizedEntryPoint" />
 
-    <bean class="org.opennaas.gui.generic.rest.AuthenticationTokenProcessingFilter" id="authenticationTokenProcessingFilter">
+    <bean class="org.opennaas.gui.rest.AuthenticationTokenProcessingFilter" id="authenticationTokenProcessingFilter">
         <constructor-arg ref="userDao" />
     </bean>
 </beans>

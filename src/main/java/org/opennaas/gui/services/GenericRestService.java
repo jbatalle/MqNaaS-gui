@@ -1,4 +1,4 @@
-package org.opennaas.gui.generic.services;
+package org.opennaas.gui.services;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
@@ -6,7 +6,7 @@ import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import java.util.Locale;
 import javax.ws.rs.core.Response.Status.Family;
 import org.apache.log4j.Logger;
-import org.opennaas.gui.generic.utils.Constants;
+import org.opennaas.gui.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.security.core.Authentication;

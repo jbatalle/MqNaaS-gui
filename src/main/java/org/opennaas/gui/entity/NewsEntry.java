@@ -1,4 +1,4 @@
-package org.opennaas.gui.generic.entity;
+package org.opennaas.gui.entity;
 
 import java.util.Date;
 
@@ -6,7 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import org.opennaas.gui.generic.JsonViews;
+import org.opennaas.gui.JsonViews;
 
 import org.codehaus.jackson.map.annotate.JsonView;
 

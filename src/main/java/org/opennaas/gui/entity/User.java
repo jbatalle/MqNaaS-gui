@@ -1,4 +1,4 @@
-package org.opennaas.gui.generic.entity;
+package org.opennaas.gui.entity;
 
 import java.util.Collection;
 import java.util.Collections;

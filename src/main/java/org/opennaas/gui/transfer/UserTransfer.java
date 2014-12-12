@@ -1,4 +1,4 @@
-package org.opennaas.gui.generic.transfer;
+package org.opennaas.gui.transfer;
 
 import java.util.Map;
 

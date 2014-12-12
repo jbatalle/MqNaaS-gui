@@ -1,4 +1,4 @@
-package org.opennaas.gui.generic.utils;
+package org.opennaas.gui.utils;
 
 /**
  * @author Josep Batallé (josep.batalle@i2cat.net)

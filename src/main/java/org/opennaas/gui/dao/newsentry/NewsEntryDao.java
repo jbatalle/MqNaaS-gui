@@ -1,7 +1,7 @@
-package org.opennaas.gui.generic.dao.newsentry;
+package org.opennaas.gui.dao.newsentry;
 
-import org.opennaas.gui.generic.dao.Dao;
-import org.opennaas.gui.generic.entity.NewsEntry;
+import org.opennaas.gui.dao.Dao;
+import org.opennaas.gui.entity.NewsEntry;
 
 
 /**

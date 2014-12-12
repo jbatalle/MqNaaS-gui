@@ -1,4 +1,4 @@
-package org.opennaas.gui.generic.rest.resources;
+package org.opennaas.gui.rest.resources;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,9 +11,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
-import org.opennaas.gui.generic.rest.TokenUtils;
-import org.opennaas.gui.generic.transfer.TokenTransfer;
-import org.opennaas.gui.generic.transfer.UserTransfer;
+import org.opennaas.gui.rest.TokenUtils;
+import org.opennaas.gui.transfer.TokenTransfer;
+import org.opennaas.gui.transfer.UserTransfer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

@@ -1,4 +1,4 @@
-package org.opennaas.gui.generic.dao.newsentry;
+package org.opennaas.gui.dao.newsentry;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import org.opennaas.gui.generic.dao.JpaDao;
-import org.opennaas.gui.generic.entity.NewsEntry;
+import org.opennaas.gui.dao.JpaDao;
+import org.opennaas.gui.entity.NewsEntry;
 
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,7 +1,7 @@
-package org.opennaas.gui.generic.dao.user;
+package org.opennaas.gui.dao.user;
 
-import org.opennaas.gui.generic.dao.Dao;
-import org.opennaas.gui.generic.entity.User;
+import org.opennaas.gui.dao.Dao;
+import org.opennaas.gui.entity.User;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 

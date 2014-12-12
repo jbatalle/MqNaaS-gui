@@ -39,11 +39,11 @@
         <property name="entityManagerFactory" ref="entityManagerFactory" />
     </bean>
 	
-    <bean id="newsEntryDao" class="org.opennaas.gui.generic.dao.newsentry.JpaNewsEntryDao"></bean>
-    <bean id="historyEntryDao" class="org.opennaas.gui.generic.dao.history.JpaHistoryEntryDao"></bean>
-    <bean id="userDao" class="org.opennaas.gui.generic.dao.user.JpaUserDao"></bean>
+    <bean id="newsEntryDao" class="org.opennaas.gui.dao.newsentry.JpaNewsEntryDao"></bean>
+    <bean id="historyEntryDao" class="org.opennaas.gui.dao.history.JpaHistoryEntryDao"></bean>
+    <bean id="userDao" class="org.opennaas.gui.dao.user.JpaUserDao"></bean>
 	
-    <bean id="dataBaseInitializer" class="org.opennaas.gui.generic.dao.DataBaseInitializer" init-method="initDataBase">
+    <bean id="dataBaseInitializer" class="org.opennaas.gui.dao.DataBaseInitializer" init-method="initDataBase">
         <constructor-arg ref="userDao" />
         <constructor-arg ref="newsEntryDao" />
         <constructor-arg ref="passwordEncoder" />
@@ -52,7 +52,7 @@
     <tx:annotation-driven transaction-manager="transactionManager" />
 
     <!-- INIT REST COMPONENTS  -->
-    <context:component-scan base-package="org.opennaas.gui.generic.rest.resources" />
+    <context:component-scan base-package="org.opennaas.gui.rest.resources" />
 	
     <bean id="objectMapper" class="org.codehaus.jackson.map.ObjectMapper" />
 	
@@ -64,6 +64,6 @@
         <property name="cacheSeconds" value="0" />
     </bean>
         
-    <bean id="clientJersey" class="org.opennaas.gui.generic.services.JerseyClient" /> 
+    <bean id="clientJersey" class="org.opennaas.gui.services.JerseyClient" /> 
 
 </beans>

@@ -1,4 +1,4 @@
-package org.opennaas.gui.generic.rest.resources;
+package org.opennaas.gui.rest.resources;
 
 import java.io.IOException;
 import java.util.List;
@@ -13,9 +13,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
-import org.opennaas.gui.generic.JsonViews;
-import org.opennaas.gui.generic.dao.newsentry.NewsEntryDao;
-import org.opennaas.gui.generic.entity.NewsEntry;
+import org.opennaas.gui.JsonViews;
+import org.opennaas.gui.dao.newsentry.NewsEntryDao;
+import org.opennaas.gui.entity.NewsEntry;
 
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;

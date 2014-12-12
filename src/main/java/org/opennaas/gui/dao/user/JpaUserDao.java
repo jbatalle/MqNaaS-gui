@@ -1,4 +1,4 @@
-package org.opennaas.gui.generic.dao.user;
+package org.opennaas.gui.dao.user;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 
-import org.opennaas.gui.generic.dao.JpaDao;
-import org.opennaas.gui.generic.entity.User;
+import org.opennaas.gui.dao.JpaDao;
+import org.opennaas.gui.entity.User;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

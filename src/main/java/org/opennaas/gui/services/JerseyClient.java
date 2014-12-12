@@ -1,4 +1,4 @@
-package org.opennaas.gui.generic.services;
+package org.opennaas.gui.services;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientHandlerException;
