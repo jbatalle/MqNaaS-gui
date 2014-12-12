@@ -37,7 +37,7 @@ public class HistoryEntryResource {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private HistoryEntryDao newsEntryDao;
+    private HistoryEntryDao historyEntryDao;
 
     @Autowired
     private ObjectMapper mapper;
@@ -53,7 +53,7 @@ public class HistoryEntryResource {
         } else {
             viewWriter = this.mapper.writerWithView(JsonViews.User.class);
         }
-        List<HistoryEntry> allEntries = this.newsEntryDao.findAll();
+        List<HistoryEntry> allEntries = this.historyEntryDao.findAll();
 
         return viewWriter.writeValueAsString(allEntries);
     }
@@ -64,7 +64,7 @@ public class HistoryEntryResource {
     public HistoryEntry read(@PathParam("id") Long id) {
         this.logger.info("read(id)");
 
-        HistoryEntry newsEntry = this.newsEntryDao.find(id);
+        HistoryEntry newsEntry = this.historyEntryDao.find(id);
         if (newsEntry == null) {
             throw new WebApplicationException(404);
         }
@@ -77,7 +77,7 @@ public class HistoryEntryResource {
     public HistoryEntry create(HistoryEntry newsEntry) {
         this.logger.info("create(): " + newsEntry);
 
-        return this.newsEntryDao.save(newsEntry);
+        return this.historyEntryDao.save(newsEntry);
     }
 
     @POST
@@ -87,7 +87,7 @@ public class HistoryEntryResource {
     public HistoryEntry update(@PathParam("id") Long id, HistoryEntry newsEntry) {
         this.logger.info("update(): " + newsEntry);
 
-        return this.newsEntryDao.save(newsEntry);
+        return this.historyEntryDao.save(newsEntry);
     }
 
     @DELETE
@@ -96,7 +96,7 @@ public class HistoryEntryResource {
     public void delete(@PathParam("id") Long id) {
         this.logger.info("delete(id)");
 
-        this.newsEntryDao.delete(id);
+        this.historyEntryDao.delete(id);
     }
 
     private boolean isAdmin() {

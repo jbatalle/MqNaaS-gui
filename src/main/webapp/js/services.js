@@ -30,6 +30,10 @@ services.factory('UserService', function ($resource) {
 
             return $resource('rest/news/:id', {id: '@id'});
         })
+        .factory('HistoryService', function ($resource) {
+
+            return $resource('rest/history/:id', {id: '@id'});
+        })
         .factory('TestMqNaaSService', ['$http', 'x2js', function ($http, x2js) {
                 console.log("GET Test MqNaaS")
                 return {
