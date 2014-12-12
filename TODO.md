@@ -13,7 +13,7 @@ TODO
 
 #### Frontend
 
-* Prepare separated services
+* Prepare separated services **Done**
 * Remove unsed controllers
 * Define generic templates (generic data of MqNaaS?)
 * Include d3js libs.
