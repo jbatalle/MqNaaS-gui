@@ -26,7 +26,7 @@
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource" />
-        <property name="persistenceUnitName" value="examplePU" />
+        <property name="persistenceUnitName" value="mqNaaSGUIPU" />
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
                 <property name="generateDdl" value="true" />
@@ -54,9 +54,7 @@
     <context:component-scan base-package="org.opennaas.gui.rest.resources" />
 	
     <bean id="objectMapper" class="org.codehaus.jackson.map.ObjectMapper" />
-	
     
-        
     <!-- Application Message Bundle -->
     <bean id="configSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="basename" value="/WEB-INF/config" />
