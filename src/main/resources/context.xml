@@ -44,6 +44,7 @@
 	
     <bean id="dataBaseInitializer" class="org.opennaas.gui.dao.DataBaseInitializer" init-method="initDataBase">
         <constructor-arg ref="userDao" />
+        <constructor-arg ref="historyEntryDao" />
         <constructor-arg ref="passwordEncoder" />
     </bean>
 

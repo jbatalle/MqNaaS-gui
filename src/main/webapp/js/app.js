@@ -10,7 +10,7 @@ angular.module('openNaaSApp', ['ngResource', 'ngRoute', 'ngCookies', 'openNaaSAp
                 ['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 
                         $routeProvider
-                                .when('/create', {
+/*                                .when('/create', {
                                     templateUrl: 'partials/create.html',
                                     controller: CreateController
                                 })
@@ -18,7 +18,7 @@ angular.module('openNaaSApp', ['ngResource', 'ngRoute', 'ngCookies', 'openNaaSAp
                                     templateUrl: 'partials/edit.html',
                                     controller: EditController
                                 })
-                                .when('/login', {
+*/                                .when('/login', {
                                     templateUrl: 'partials/login.html',
                                     controller: 'LoginController'
                                 })
@@ -44,7 +44,7 @@ angular.module('openNaaSApp', ['ngResource', 'ngRoute', 'ngCookies', 'openNaaSAp
                                 })
                                 .otherwise({
                                     templateUrl: 'partials/index.html',
-                                    controller: IndexController
+                                    //controller: IndexController
                                 });
 
                         $locationProvider.hashPrefix('!');
@@ -136,7 +136,7 @@ angular.module('openNaaSApp', ['ngResource', 'ngRoute', 'ngCookies', 'openNaaSAp
     $rootScope.initialized = true;
 });
 
-
+/*
 function IndexController($scope, NewsService) {
 
     $scope.newsEntries = NewsService.query();
@@ -148,7 +148,6 @@ function IndexController($scope, NewsService) {
     };
 }
 ;
-
 
 function EditController($scope, $routeParams, $location, NewsService) {
 
@@ -174,6 +173,6 @@ function CreateController($scope, $location, NewsService) {
     };
 }
 ;
-
+*/
 
 var services = angular.module('openNaaSApp.services', ['ngResource']);
