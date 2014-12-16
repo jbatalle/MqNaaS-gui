@@ -11,9 +11,9 @@
 
 <table ng-table="tableParams" class="table ng-table-responsive">
     <tr ng-repeat="hist in $data">
-        <td data-title="'Type'">{{hist.type}}</td>
-        <td data-title="'Date'">{{hist.date | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-        <td data-title="'Action'">{{hist.content}}</td>
+        <td data-title="'Date'" sortable="'date'" class="col-sm-2 col-md-2 col-lg-2">{{hist.date | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+        <td data-title="'Type'" sortable="'type'" class="col-sm-1 col-md-1 col-lg-1">{{hist.type}}</td>
+        <td data-title="'Information'">{{hist.content}}</td>
         <td data-title="'Edit'" ng-show="hasRole('admin')">
             <a href="#!/edit/{{hist.id}}" class="btn btn-xs btn-default" ng-show="hasRole('admin')" title="edit"><span class="glyphicon glyphicon-pencil"></span></a>
         </td>

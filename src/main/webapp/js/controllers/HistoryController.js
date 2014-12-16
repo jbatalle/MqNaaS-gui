@@ -15,19 +15,13 @@ angular.module('openNaaSApp')
                 page: 1, // show first page
                 count: 10, // count per page
                 sorting: {
-                    name: 'asc'     // initial sorting
+                    date: 'desc'     // initial sorting
                 }
             }, {
                 total: data.length,
                 getData: function ($defer, params) {
-                    console.log(data);
-                    var filteredData = data;
-                    var orderedRecentActivity = params.sorting() ? $filter('orderBy')(filteredData, params.orderBy()) : filteredData;
-                    params.total(data.length);
-                    $defer.resolve(data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-
-//                    $defer.resolve(orderedRecentActivity.slice((params.page() - 1) * params.count(),       params.page() * params.count()));
-//                    $scope.history = orderedRecentActivity.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                    var orderedData = params.sorting() ? $filter('orderBy')(data, params.orderBy()) : data;
+                    $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
                 }, $scope: {$data: {}}
             });
 console.log($scope);
