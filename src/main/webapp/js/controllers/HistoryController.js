@@ -30,7 +30,7 @@ angular.module('openNaaSApp')
 //                    $scope.history = orderedRecentActivity.slice((params.page() - 1) * params.count(), params.page() * params.count());
                 }, $scope: {$data: {}}
             });
-
+console.log($scope);
             /*
              $scope.history = HistoryService.query();
              var getData = function () {
