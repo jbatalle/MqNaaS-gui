@@ -64,30 +64,30 @@ public class HistoryEntryResource {
     public HistoryEntry read(@PathParam("id") Long id) {
         this.logger.info("read(id)");
 
-        HistoryEntry newsEntry = this.historyEntryDao.find(id);
-        if (newsEntry == null) {
+        HistoryEntry historyEntry = this.historyEntryDao.find(id);
+        if (historyEntry == null) {
             throw new WebApplicationException(404);
         }
-        return newsEntry;
+        return historyEntry;
     }
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public HistoryEntry create(HistoryEntry newsEntry) {
-        this.logger.info("create(): " + newsEntry);
+    public HistoryEntry create(HistoryEntry historyEntry) {
+        this.logger.info("create(): " + historyEntry);
 
-        return this.historyEntryDao.save(newsEntry);
+        return this.historyEntryDao.save(historyEntry);
     }
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public HistoryEntry update(@PathParam("id") Long id, HistoryEntry newsEntry) {
-        this.logger.info("update(): " + newsEntry);
+    public HistoryEntry update(@PathParam("id") Long id, HistoryEntry historyEntry) {
+        this.logger.info("update(): " + historyEntry);
 
-        return this.historyEntryDao.save(newsEntry);
+        return this.historyEntryDao.save(historyEntry);
     }
 
     @DELETE
