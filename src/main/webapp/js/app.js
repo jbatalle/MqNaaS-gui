@@ -45,6 +45,9 @@ angular.module('openNaaSApp', ['ngResource', 'ngRoute', 'ngCookies', 'openNaaSAp
                                 .when('/rootResource', {
                                     templateUrl: 'partials/rootResource/index.html',
                                     controller: 'RootResourceController'
+                                }).when('/info/:id', {
+                                    templateUrl: 'partials/rootResource/info.html',
+                                    controller: 'InfoRootResourceController'
                                 })
                                 .otherwise({
                                     templateUrl: 'partials/index.html',

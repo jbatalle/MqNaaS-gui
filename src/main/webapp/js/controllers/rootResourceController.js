@@ -2,7 +2,7 @@
 
 angular.module('openNaaSApp')
         .controller('RootResourceController', function ($scope, RootResourceService) {
-            RootResourceService.get().then(function (data) {
+            RootResourceService.list().then(function (data) {
                 console.log(data);
                 $scope.data = data;
                 console.log($scope.data);
@@ -23,6 +23,12 @@ angular.module('openNaaSApp')
             json = x2js.xml_str2json(json);
             console.log(json);
             RootResourceService.put(json).then(function (data) {
+                $scope.data = data;
+                console.log($scope.data);
+            });
+        }).controller('InfoRootResourceController', function ($scope, RootResourceService, $routeParams) {
+            RootResourceService.get($routeParams.id).then(function (data) {
+                console.log(data);
                 $scope.data = data;
                 console.log($scope.data);
             });
