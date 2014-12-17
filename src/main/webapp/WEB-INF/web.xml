@@ -37,9 +37,7 @@
         <url-pattern>/rest/*</url-pattern>
     </servlet-mapping>
 	
-    <!--
-           Apply Spring Security Filter to all Requests 
-    -->
+    <!-- Apply Spring Security Filter to all Requests -->
     <filter>
         <filter-name>springSecurityFilterChain</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
