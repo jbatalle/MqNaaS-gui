@@ -1,0 +1,18 @@
+
+TEST MQNaaS!
+<br/>DataSet json with "dataSet| json": <br/>
+{{data| json}}
+<br/>DataSet json without "dataSet| json": <br/>
+{{data}}
+<br/>
+<p>The list has {{data.IRootResource.IRootResourceId.length}} items.</p>
+Test div repeat: <br/>
+<div ng-repeat="item in data.IRootResource.IRootResourceId">
+    {{item}}
+</div>
+<br/>Test li repeat: <br/>
+<li ng-repeat="person in data.IRootResource.IRootResourceId" ng-init="id=$index;">
+    Element with id: {{id}}: <span>{{person}}</span>
+</li>
+
+Test end!
