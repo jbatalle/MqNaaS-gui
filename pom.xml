@@ -34,6 +34,7 @@
                 <configuration>
                     <source>1.6</source>
                     <target>1.6</target>
+                    <redirectTestOutputToFile>true</redirectTestOutputToFile>
                 </configuration>
             </plugin>
             <plugin>
@@ -171,7 +172,11 @@
             <version>1.17</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20140107</version>
+        </dependency>
     </dependencies>
-
 </project>
 
