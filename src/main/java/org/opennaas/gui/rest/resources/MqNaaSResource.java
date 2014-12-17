@@ -1,8 +1,6 @@
 package org.opennaas.gui.rest.resources;
 
 import java.io.IOException;
-import java.util.Map;
-import java.util.Map.Entry;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,34 +9,25 @@ import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
 import org.opennaas.gui.services.RestServiceException;
 import org.opennaas.gui.utils.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-@Component
+//@Component
 @Path("/mqnaas")
 public class MqNaaSResource {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-//    @Autowired
-//    protected JerseyClient clientJersey;
+//    @Produces(MediaType.APPLICATION_XML)
     @GET
-    @Produces(MediaType.APPLICATION_XML)
-    @Path("{path}")
-    public @ResponseBody
-    void get(@PathParam("path") String path, @Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, RestServiceException, ServletException {
-        this.logger.info("GET() " + path);
+    @Path("/{res1:.*}")
+    public @ResponseBody void get(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, RestServiceException, ServletException {
+//        this.logger.info("GET() " + path);
         String url = "http://admin:123456@localhost:9000/mqnaas/IRootResourceProvider";
 //response.sendRedirect("http://admin:123456@localhost:9000/mqnaas/IRootResourceProvider");
 //        response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
@@ -93,10 +82,8 @@ public class MqNaaSResource {
      }*/
 
     @PUT
-//    @Produces(MediaType.APPLICATION_XML)
-    @Path("{path}")
-    public @ResponseBody
-    void put(@PathParam("path") String path, @RequestBody Object object, @Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, RestServiceException, ServletException {
+    @Path("/{res1:.*}")
+    public @ResponseBody void put(@PathParam("path") String path, @RequestBody Object object, @Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, RestServiceException, ServletException {
         this.logger.info("PUT() " + path);
         String url = "http://admin:123456@localhost:9000/mqnaas/IRootResourceProvider";
 //response.sendRedirect("http://admin:123456@localhost:9000/mqnaas/IRootResourceProvider");
@@ -121,7 +108,7 @@ public class MqNaaSResource {
     }
     
     @DELETE
-    @Path("{path}/{id}")
+    @Path("/{res1:.*}")
     public void delete(@PathParam("path") String path, @Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, RestServiceException, ServletException {
         this.logger.info("DELETE() " + path);
         String url = "http://admin:123456@localhost:9000/mqnaas/IRootResourceProvider";
