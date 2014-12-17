@@ -8,7 +8,7 @@ TODO
 #### Backend
 * Remove JerseyClient
 * Remove newEntrys used for 'news' **Done**
-* Create history (log)
+* Create history (log) **Done**
 * Messages
 
 #### Frontend
@@ -19,6 +19,6 @@ TODO
 * Include d3js libs.
 	* d3 bower **Done**
 	* d3 test example
-* Create history, store all actions
+* Create history, store all actions **Done**
 * Messages
 * AccessLevels
