@@ -42,6 +42,10 @@ angular.module('openNaaSApp', ['ngResource', 'ngRoute', 'ngCookies', 'openNaaSAp
                                     templateUrl: 'partials/history/create.html',
                                     controller: 'HistoryCreateController'
                                 })
+                                .when('/rootResource', {
+                                    templateUrl: 'partials/rootResource/index.html',
+                                    controller: 'RootResourceController'
+                                })
                                 .otherwise({
                                     templateUrl: 'partials/index.html',
                                     //controller: IndexController
