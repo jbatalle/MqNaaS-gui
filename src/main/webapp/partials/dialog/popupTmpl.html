@@ -1,0 +1,49 @@
+<p>External modal template with external scope: <code>{{value}}</code></p>
+
+<div class="container-fluid" ng-controller="EditUserController">
+
+    <div class="text-center container-fluid">
+        <label class="sub-header">Edit User: {{userEmail}}</label>
+    </div>
+
+    <form action="editUser" method="post" name="editForm">
+        <div>
+            <div class="pull-right">
+                <label>Delete User</label><br> <a href="#"
+                    class="btn btn-block btn-sm btn-danger" ng-click="deleteUser(userEmail)">{{userEmail}}</a>
+            </div>
+            <div>
+                <label>Change Role</label>
+            </div>
+            <div>
+                <label>
+                <input type="checkbox" ng-model="superVisor" name="superVisorFlag" 
+                ng-true-value="1" ng-false-value="0" value="${existingUser.superVisorFlag}">
+                Make a Supervisor</label>
+            </div>
+            <div>
+                <input type="text" class="form-control" ng-model="email"
+                    name="emailAddress" ng-disabled = "true"
+                    ng-options="email for email in userEmail"
+                    value="${existingUser.emailAddress}"
+                    placeholder="Enter New User Email Address" bs-typeahead>
+            </div>
+            <div>
+                <input type="text" class="form-control" ng-model="firstName"
+                    name="firstName" value="${existingUser.firstName}"
+                    placeholder="Enter First Name" bs-typeahead>
+            </div>
+            <div>
+                <input type="text" class="form-control" ng-model="lastName"
+                    name="lastName" value="${existingUser.lastName}"
+                    placeholder="Enter Last Name" bs-typeahead>
+            </div>
+
+
+            <div>
+                <a href="#" class="btn btn-sm btn-primary" ng-click="saveChanges()">Save Changes</a>
+            </div>
+        </div>
+    </form>
+
+</div>
