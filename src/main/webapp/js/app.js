@@ -5,7 +5,7 @@ angular.module('openNaaSApp', ['ngResource', 'ngRoute', 'ngCookies', 'openNaaSAp
             localStorageServiceProvider
                 .setPrefix('openNaaSApp')
                 .setStorageType('sessionStorage')
-                .setNotify(true, true)
+                .setNotify(true, true);
         }).config(
                 ['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 
@@ -48,6 +48,22 @@ angular.module('openNaaSApp', ['ngResource', 'ngRoute', 'ngCookies', 'openNaaSAp
                                 }).when('/info/:id', {
                                     templateUrl: 'partials/rootResource/info.html',
                                     controller: 'InfoRootResourceController'
+                                })
+                                .when('/listServices/:id', {
+                                    templateUrl: 'partials/serviceProvider/info.html',
+                                    controller: 'serviceProviderController'
+                                })
+                                .when('/rootResource/create', {
+                                    templateUrl: 'partials/rootResource/info.html',
+                                    controller: 'CreateRootResourceController'
+                                })
+                                .when('/tree', {
+                                    templateUrl: 'partials/tree.html',
+                                    controller: 'treeCtrl'
+                                })
+                                .when('/infoResource/:id', {
+                                    templateUrl: 'partials/mqnaasResource/info.html',
+                                    controller: 'MqNaaSResourceController'
                                 })
                                 .otherwise({
                                     templateUrl: 'partials/index.html',
@@ -183,3 +199,4 @@ function CreateController($scope, $location, NewsService) {
 */
 
 var services = angular.module('openNaaSApp.services', ['ngResource']);
+var genericUrl = "rest/mqnaas/";

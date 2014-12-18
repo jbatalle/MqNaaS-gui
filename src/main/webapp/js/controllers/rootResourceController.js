@@ -1,10 +1,12 @@
 'use strict';
 
 angular.module('openNaaSApp')
-        .controller('RootResourceController', function ($scope, RootResourceService) {
+        .controller('RootResourceController', function ($scope, RootResourceService, localStorageService) {
+            
             RootResourceService.list().then(function (data) {
                 console.log(data);
                 $scope.data = data;
+                localStorageService.set("mqNaaSElements", data);
                 console.log($scope.data);
             });
 
@@ -19,6 +21,7 @@ angular.module('openNaaSApp')
         })
         .controller('CreateRootResourceController', function ($scope, RootResourceService) {
             var json = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><ns2:rootResourceDescriptor xmlns:ns2="org.mqnaas"><specification><type>NETWORK</type><model>Internal</model><version>1.0</version></specification></ns2:rootResourceDescriptor>';
+//            json = '<?xml version="1.0" encoding="utf-8"?><request><operation token="0" type="show" entity="equipment"><equipment id="0" /></operation></operation></request>';
             var x2js = new X2JS();
             json = x2js.xml_str2json(json);
             console.log(json);
@@ -26,10 +29,12 @@ angular.module('openNaaSApp')
                 $scope.data = data;
                 console.log($scope.data);
             });
-        }).controller('InfoRootResourceController', function ($scope, RootResourceService, $routeParams) {
+        }).controller('InfoRootResourceController', function ($scope, RootResourceService, $routeParams, localStorageService) {
             RootResourceService.get($routeParams.id).then(function (data) {
                 console.log(data);
+                console.log("mqEl-"+$routeParams.id);
                 $scope.data = data;
+                localStorageService.set("mqEl-"+$routeParams.id, data);
                 console.log($scope.data);
             });
         });
