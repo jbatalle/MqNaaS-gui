@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 
 /**
- * @author Josep Batallé (josep.batalle@i2cat.net) TODO: Generic Jersey Service
- * Redirect/proxy Unused - TO REMOVE
+ * @author Josep Batallé (josep.batalle@i2cat.net)
+ * ARN CLIENT
  */
 public class ARNClient extends GenericRestService {
 

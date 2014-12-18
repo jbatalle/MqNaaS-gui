@@ -1,7 +1,6 @@
 package org.opennaas.gui.rest.resources;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.logging.Level;
 
 import javax.ws.rs.Consumes;
@@ -14,23 +13,17 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
-import org.opennaas.gui.JsonViews;
 import org.opennaas.gui.dao.history.HistoryEntryDao;
 import org.opennaas.gui.entity.HistoryEntry;
 
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.ObjectWriter;
 import org.opennaas.gui.services.ARNClient;
 import org.opennaas.gui.services.RestServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -44,7 +37,7 @@ public class ARNResource {
 
     @Autowired
     private ObjectMapper mapper;
-    
+
     @Autowired
     private ARNClient arnClient;
 
@@ -52,14 +45,14 @@ public class ARNResource {
     @Produces(MediaType.APPLICATION_XML)
     public String list() throws JsonGenerationException, JsonMappingException, IOException {
         this.logger.info("list()");
-String content = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
-"<request>\n" +
-" <operation token=\"0\" type=\"show\" entity=\"equipment\">\n" +
-" <equipment id='0' />\n" +
-" </operation>\n" +
-" </operation>\n" +
-"</request>";
-String response = "";
+        String content = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+                + "<request>\n"
+                + " <operation token=\"0\" type=\"show\" entity=\"equipment\">\n"
+                + " <equipment id='0' />\n"
+                + " </operation>\n"
+                + " </operation>\n"
+                + "</request>";
+        String response = "";
         try {
             response = arnClient.post(content);
         } catch (RestServiceException ex) {
@@ -109,23 +102,6 @@ String response = "";
         this.logger.info("delete(id)");
 
         this.historyEntryDao.delete(id);
-    }
-
-    private boolean isAdmin() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Object principal = authentication.getPrincipal();
-        if (principal instanceof String && ((String) principal).equals("anonymousUser")) {
-            return false;
-        }
-        UserDetails userDetails = (UserDetails) principal;
-
-        for (GrantedAuthority authority : userDetails.getAuthorities()) {
-            if (authority.toString().equals("admin")) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
 }

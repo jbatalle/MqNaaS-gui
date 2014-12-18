@@ -83,8 +83,8 @@ public class MqNaaSResource {
 
     @PUT
     @Path("/{res1:.*}")
-    public @ResponseBody void put(@PathParam("path") String path, @RequestBody Object object, @Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, RestServiceException, ServletException {
-        this.logger.info("PUT() " + path);
+    public @ResponseBody void put(@RequestBody Object object, @Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, RestServiceException, ServletException {
+        this.logger.info("PUT() ");
         String url = "http://admin:123456@localhost:9000/mqnaas/IRootResourceProvider";
 //response.sendRedirect("http://admin:123456@localhost:9000/mqnaas/IRootResourceProvider");
 //        response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
@@ -109,8 +109,8 @@ public class MqNaaSResource {
     
     @DELETE
     @Path("/{res1:.*}")
-    public void delete(@PathParam("path") String path, @Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, RestServiceException, ServletException {
-        this.logger.info("DELETE() " + path);
+    public void delete(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, RestServiceException, ServletException {
+        this.logger.info("DELETE() ");
         String url = "http://admin:123456@localhost:9000/mqnaas/IRootResourceProvider";
         logger.info("URI: " + (String) request.getAttribute("uri"));
 
