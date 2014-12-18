@@ -62,5 +62,6 @@
     </bean>
         
     <bean id="clientJersey" class="org.opennaas.gui.services.JerseyClient" /> 
+    <bean id="arnClient" class="org.opennaas.gui.services.ARNClient" /> 
 
 </beans>
