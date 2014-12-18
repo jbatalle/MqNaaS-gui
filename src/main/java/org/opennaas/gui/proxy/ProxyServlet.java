@@ -39,6 +39,11 @@ public class ProxyServlet extends HttpServlet {
         String url = "http://ipaddress:port/contextpath" + request.getAttribute("uri") + "?" + request.getQueryString();
         url = baseUrl + request.getAttribute("path");//recevie /mqnaas/IRootResourceProvider
         logger.error("URL: "+url);
+        System.out.println("\nURIS : " + request.getPathInfo());
+        System.out.println("\nURIS : " + request.getQueryString());
+        if( request.getQueryString() != null ){
+            url = url + "?" + request.getQueryString();
+        }
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
