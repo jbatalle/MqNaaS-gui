@@ -1,6 +1,9 @@
 package org.opennaas.gui.rest.resources;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,16 +11,14 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
 import org.opennaas.gui.services.RestServiceException;
-import org.opennaas.gui.utils.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-//@Component
+@Component
 @Path("/mqnaas")
 public class MqNaaSResource {
 
@@ -26,13 +27,10 @@ public class MqNaaSResource {
 //    @Produces(MediaType.APPLICATION_XML)
     @GET
     @Path("/{res1:.*}")
-    public @ResponseBody void get(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, RestServiceException, ServletException {
-//        this.logger.info("GET() " + path);
+    public @ResponseBody
+    String get(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, RestServiceException, ServletException {
+        this.logger.info("GET()");
         String url = "http://admin:123456@localhost:9000/mqnaas/IRootResourceProvider";
-//response.sendRedirect("http://admin:123456@localhost:9000/mqnaas/IRootResourceProvider");
-//        response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
-//response.setHeader("Location", "http://admin:123456@localhost:9000/mqnaas/IRootResourceProvider");
-//response.flushBuffer();
         logger.info("URI: " + (String) request.getAttribute("uri"));
         HttpServletRequest req = (HttpServletRequest) request;
         request.setAttribute("uri", req.getRequestURI().substring(req.getContextPath().length()));
@@ -40,7 +38,7 @@ public class MqNaaSResource {
         // Forward filtered requests to MyProxy servlet
         request.getRequestDispatcher("/ProxyServlet").forward(request, response);
 
-        return;
+        return "";
         /*        logger.error(request.getContextPath());
          logger.error(request.getPathInfo());
          logger.error(request.getQueryString());
@@ -82,31 +80,53 @@ public class MqNaaSResource {
      }*/
 
     @PUT
+//    @Consumes(MediaType.APPLICATION_XML)
+//    @Produces(MediaType.TEXT_PLAIN)
     @Path("/{res1:.*}")
-    public @ResponseBody void put(@RequestBody Object object, @Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, RestServiceException, ServletException {
+    public @ResponseBody
+    void put(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, RestServiceException, ServletException {
         this.logger.info("PUT() ");
-        String url = "http://admin:123456@localhost:9000/mqnaas/IRootResourceProvider";
-//response.sendRedirect("http://admin:123456@localhost:9000/mqnaas/IRootResourceProvider");
-//        response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
-//response.setHeader("Location", "http://admin:123456@localhost:9000/mqnaas/IRootResourceProvider");
-//response.flushBuffer();
+
+        String body = null;
+        StringBuilder stringBuilder = new StringBuilder();
+        BufferedReader bufferedReader = null;
+        try {
+            InputStream inputStream = request.getInputStream();
+            if (inputStream != null) {
+                bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                char[] charBuffer = new char[128];
+                int bytesRead = -1;
+                while ((bytesRead = bufferedReader.read(charBuffer)) > 0) {
+                    stringBuilder.append(charBuffer, 0, bytesRead);
+                }
+            } else {
+                stringBuilder.append("");
+            }
+        } catch (IOException ex) {
+            throw ex;
+        } finally {
+            if (bufferedReader != null) {
+                try {
+                    bufferedReader.close();
+                } catch (IOException ex) {
+                    throw ex;
+                }
+            }
+        }
+        body = stringBuilder.toString();
+
         logger.info("URI: " + (String) request.getAttribute("uri"));
-        String test = Utils.convertToJson(object);
-        logger.info("Object: " + test);
-        logger.info("Object: " + object.toString());
+        logger.info("Object: " + body);
         HttpServletRequest req = (HttpServletRequest) request;
         request.setAttribute("uri", req.getRequestURI().substring(req.getContextPath().length()));
         request.setAttribute("path", request.getPathInfo());
-//        request.setAttribute("object", object.toString());
-//        String json = '<?xml version="1.0"?>';
-        //xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><ns2:rootResourceDescriptor xmlns:ns2=\"org.mqnaas\"><specification><type>NETWORK</type><model>Internal</model><version>1.0</version></specification></ns2:rootResourceDescriptor>";
-        request.setAttribute("object", Utils.adaptJsonToXml(test));
+        request.setAttribute("object", body);
         // Forward filtered requests to MyProxy servlet
         request.getRequestDispatcher("/ProxyServlet").forward(request, response);
 
         return;
     }
-    
+
     @DELETE
     @Path("/{res1:.*}")
     public void delete(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, RestServiceException, ServletException {
