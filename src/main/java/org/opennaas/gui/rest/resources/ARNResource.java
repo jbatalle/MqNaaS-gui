@@ -1,30 +1,25 @@
 package org.opennaas.gui.rest.resources;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.logging.Level;
-
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-
-import org.opennaas.gui.dao.history.HistoryEntryDao;
-import org.opennaas.gui.entity.HistoryEntry;
-
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.opennaas.gui.services.ARNClient;
 import org.opennaas.gui.services.RestServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Component
 @Path("/arn")
@@ -33,75 +28,48 @@ public class ARNResource {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private HistoryEntryDao historyEntryDao;
-
-    @Autowired
-    private ObjectMapper mapper;
-
-    @Autowired
     private ARNClient arnClient;
 
-    @GET
+    @POST
     @Produces(MediaType.APPLICATION_XML)
-    public String list() throws JsonGenerationException, JsonMappingException, IOException {
-        this.logger.info("list()");
-        String content = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
-                + "<request>\n"
-                + " <operation token=\"0\" type=\"show\" entity=\"equipment\">\n"
-                + " <equipment id='0' />\n"
-                + " </operation>\n"
-                + " </operation>\n"
-                + "</request>";
-        String response = "";
+    public @ResponseBody String getData(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, RestServiceException, ServletException {
+        this.logger.info("POST data to ARN() ");
+
+        StringBuilder stringBuilder = new StringBuilder();
+        BufferedReader bufferedReader = null;
         try {
-            response = arnClient.post(content);
+            InputStream inputStream = request.getInputStream();
+            if (inputStream != null) {
+                bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                char[] charBuffer = new char[128];
+                int bytesRead = -1;
+                while ((bytesRead = bufferedReader.read(charBuffer)) > 0) {
+                    stringBuilder.append(charBuffer, 0, bytesRead);
+                }
+            } else {
+                stringBuilder.append("");
+            }
+        } catch (IOException ex) {
+            throw ex;
+        } finally {
+            if (bufferedReader != null) {
+                try {
+                    bufferedReader.close();
+                } catch (IOException ex) {
+                    throw ex;
+                }
+            }
+        }
+        String body = stringBuilder.toString();
+
+        String responseData = "";
+        try {
+            responseData = arnClient.post(body);
         } catch (RestServiceException ex) {
             logger.error("SOme errror");
             java.util.logging.Logger.getLogger(ARNResource.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return response;
+        return responseData;
     }
-
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("{id}")
-    public HistoryEntry read(@PathParam("id") Long id) {
-        this.logger.info("read(id)");
-
-        HistoryEntry historyEntry = this.historyEntryDao.find(id);
-        if (historyEntry == null) {
-            throw new WebApplicationException(404);
-        }
-        return historyEntry;
-    }
-
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    public HistoryEntry create(HistoryEntry historyEntry) {
-        this.logger.info("create(): " + historyEntry);
-
-        return this.historyEntryDao.save(historyEntry);
-    }
-
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Path("{id}")
-    public HistoryEntry update(@PathParam("id") Long id, HistoryEntry historyEntry) {
-        this.logger.info("update(): " + historyEntry);
-
-        return this.historyEntryDao.save(historyEntry);
-    }
-
-    @DELETE
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("{id}")
-    public void delete(@PathParam("id") Long id) {
-        this.logger.info("delete(id)");
-
-        this.historyEntryDao.delete(id);
-    }
-
 }

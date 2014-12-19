@@ -1,0 +1,17 @@
+<table ng-table="tableParams" class="table ng-table-responsive">
+    <tr ng-repeat="iface in $data">
+        {{iface}}
+        <td data-title="'Eth ID'" sortable="'date'" class="col-sm-2 col-md-2 col-lg-2">{{iface._name}}</td>
+        <td data-title="'HighLayer'" sortable="'type'" class="col-sm-1 col-md-1 col-lg-1">{{iface._collision }}</td>
+        <td data-title="'Admin'" sortable="'type'" class="col-sm-1 col-md-1 col-lg-1">{{iface._admin }}</td>
+        <td data-title="'Auto-negotiation'" sortable="'type'" class="col-sm-1 col-md-1 col-lg-1">{{iface._collision }}</td>
+        <td data-title="'MediaType'" sortable="'type'" class="col-sm-1 col-md-1 col-lg-1">{{iface.ethStatus._mediaType }}</td>
+        <td data-title="'Collisions'" sortable="'type'" class="col-sm-1 col-md-1 col-lg-1">{{iface.ethStatus._collision }}</td>
+        <td data-title="'Link'" sortable="'type'" class="col-sm-1 col-md-1 col-lg-1">{{iface.ethStatus._link }}</td>
+        <td data-title="'Tx'" sortable="'type'" class="col-sm-1 col-md-1 col-lg-1">{{iface.ethStatus._link }}</td>
+        <td data-title="'Rx'" sortable="'type'" class="col-sm-1 col-md-1 col-lg-1">{{iface.ethStatus._link }}</td>
+        <td data-title="'Statistics'" sortable="'type'" class="col-sm-1 col-md-1 col-lg-1">
+        <a href="" ng-click="viewStatistics(iface._interfaceId)" title="View">View</a>
+        </td>
+    </tr>
+</table>
