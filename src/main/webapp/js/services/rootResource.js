@@ -9,7 +9,7 @@ services.factory('RootResourceService', ['$http', 'x2js', 'HistoryService', func
                     var his = new HistoryService();
                     his.content = response.status+" - GET (IRootResourceAdministrastion): "+response.statusText;
                     his.type = "INFO";
-                    //his.$save(function (data) {console.log(data);});
+                    his.$save(function (data) {console.log(data);});
                     return json;
                 }
                 );
@@ -37,7 +37,7 @@ services.factory('RootResourceService', ['$http', 'x2js', 'HistoryService', func
                     var his = new HistoryService();
                     his.content = response.status+" - GET (IRootResourceAdministrastion): "+response.statusText;
                     his.type = "INFO";
-                    //his.$save(function (data) {console.log(data);});
+                    his.$save(function (data) {console.log(data);});
                     return json;
                 }
                 );

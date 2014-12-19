@@ -12,7 +12,7 @@ services.factory('TestMqNaaSService', ['$http', 'x2js', 'HistoryService', functi
                     var his = new HistoryService();
                     his.content = "Jojojo";
                     his.type = "INFO";
-//                    his.$save(function (data) {console.log(data);});
+                    his.$save(function (data) {console.log(data);});
                     return json;
                 }
                 );

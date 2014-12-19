@@ -9,14 +9,14 @@ services.factory('MqNaaSResourceService', ['$http', 'x2js', 'HistoryService', fu
                     var his = new HistoryService();
                     his.content = response.status+" - GET (IRootResourceAdministrastion): "+response.statusText;
                     his.type = "INFO";
-                    //his.$save(function (data) {console.log(data);});
+                    is.$save(function (data) {console.log(data);});
                     return json;
                 }
                 );
                 return promise;
             },
-            put: function (data) {
-                var promise = $http.put('rest/mqnaas/IRootResourceAdministration', data).then(function (response) {
+            put: function (url, data) {
+                var promise = $http.put(url, data).then(function (response) {
                     // convert the data to JSON and provide
                     // it to the success function below
                     //var x2js = new X2JS();
@@ -37,7 +37,7 @@ services.factory('MqNaaSResourceService', ['$http', 'x2js', 'HistoryService', fu
                     var his = new HistoryService();
                     his.content = response.status+" - GET (IRootResourceAdministrastion): "+response.statusText;
                     his.type = "INFO";
-                    //his.$save(function (data) {console.log(data);});
+                    his.$save(function (data) {console.log(data);});
                     return json;
                 }
                 );
