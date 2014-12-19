@@ -69,6 +69,10 @@ angular.module('openNaaSApp', ['ngResource', 'ngRoute', 'ngCookies', 'openNaaSAp
                                     templateUrl: 'partials/sodales/index.html',
                                     controller: 'SodalesController'
                                 })
+                                .when('/sodales_statistics', {
+                                    templateUrl: 'partials/sodales/statistics.html',
+                                    controller: 'SodalesStatisticsController'
+                                })
                                 .otherwise({
                                     templateUrl: 'partials/index.html',
                                     //controller: IndexController
