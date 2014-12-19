@@ -9,14 +9,14 @@ services.factory('MqNaaSResourceService', ['$http', 'x2js', 'HistoryService', fu
                     var his = new HistoryService();
                     his.content = response.status+" - GET (IRootResourceAdministrastion): "+response.statusText;
                     his.type = "INFO";
-                    is.$save(function (data) {console.log(data);});
+                    his.$save(function (data) {console.log(data);});
                     return json;
                 }
                 );
                 return promise;
             },
             put: function (url, data) {
-                var promise = $http.put(url, data).then(function (response) {
+                var promise = $http.put(genericUrl + url, data).then(function (response) {
                     // convert the data to JSON and provide
                     // it to the success function below
                     //var x2js = new X2JS();
