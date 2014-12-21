@@ -73,6 +73,9 @@ angular.module('openNaaSApp', ['ngResource', 'ngRoute', 'ngCookies', 'openNaaSAp
                                     templateUrl: 'partials/sodales/statistics.html',
                                     controller: 'SodalesStatisticsController'
                                 })
+                                .when('/graph', {
+                                    templateUrl: 'partials/graph.html'
+                                })
                                 .otherwise({
                                     templateUrl: 'partials/index.html',
                                     //controller: IndexController
@@ -208,3 +211,4 @@ function CreateController($scope, $location, NewsService) {
 
 var services = angular.module('openNaaSApp.services', ['ngResource']);
 var genericUrl = "rest/mqnaas/";
+var graph;
