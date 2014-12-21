@@ -1,12 +1,17 @@
-{{data}}
 <table ng-table="tableParams" class="table ng-table-responsive">
-    <tr ng-repeat="counters in $data">
-        {{counters}}
-        {{counters.rx}}
-        {{counters.counters}}
-        <td data-title="'Eth ID'" class="col-sm-2 col-md-2 col-lg-2">{{rx._collisions}}</td>
-        <td data-title="'HighLayer'" class="col-sm-1 col-md-1 col-lg-1">{{counters.rx._collisions }}</td>
-        <td data-title="'Admin'" class="col-sm-1 col-md-1 col-lg-1">{{iface._admin }}</td>
-        </td>
+    <tr ng-repeat="item in $data"  ng-init="id=$index;">
+        <td data-title="'Eth ID'" class="col-sm-2 col-md-2 col-lg-2">{{item}}</td>
+        <td data-title="'HighLayer'" class="col-sm-1 col-md-1 col-lg-1">{{item.rx._collisions }}</td>
+        <td data-title="'Admin'" class="col-sm-1 col-md-1 col-lg-1">{{item._dropEvents}}</td>
     </tr>
 </table>
+
+<!--
+<table class="table ng-table-responsive">
+    <tr ng-repeat="counters in vars">
+        <td data-title="'Eth ID'" class="col-sm-2 col-md-2 col-lg-2">{{counters.tx._collisions}}</td>
+        <td data-title="'HighLayer'" class="col-sm-1 col-md-1 col-lg-1">{{counters.rx._collisions }}</td>
+        <td data-title="'Admin'" class="col-sm-1 col-md-1 col-lg-1">{{iface._admin }}</td>
+    </tr>
+</table>
+-->
