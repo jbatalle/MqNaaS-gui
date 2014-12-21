@@ -11,8 +11,12 @@ services.factory('MqNaaSResourceService', ['$http', 'x2js', 'HistoryService', fu
                     his.type = "INFO";
                     his.$save(function (data) {console.log(data);});
                     return json;
-                }
-                );
+                }, function(response){
+                    var his = new HistoryService();
+                    his.content = response.status+" - GET (IRootResourceAdministrastion): "+response.statusText;
+                    his.type = "ERROR";
+                    his.$save(function (data) {console.log(data);});
+                });
                 return promise;
             },
             put: function (url, data) {
