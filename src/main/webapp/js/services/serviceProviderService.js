@@ -9,13 +9,13 @@ services.factory('ServiceProviderService', ['$http', 'x2js', 'HistoryService', f
                     var his = new HistoryService();
                     his.content = response.status+" - GET List (IServiceProvider): "+response.statusText;
                     his.type = "INFO";
-                    his.$save(function (data) {console.log(data);});
+                    his.$save();
                     return json;
                 }, function(response){
                     var his = new HistoryService();
                     his.content = response.status+" - GET List (IServiceProvider): "+response.statusText;
                     his.type = "ERROR";
-                    his.$save(function (data) {console.log(data);});
+                    his.$save();
                 });
                 return promise;
             }

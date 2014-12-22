@@ -12,13 +12,13 @@ services.factory('arnService', ['$http', 'x2js', 'HistoryService', function ($ht
                     var his = new HistoryService();
                     his.content = response.status+" - PUT (ARN Service Statistics): "+response.data;
                     his.type = "INFO";
-//                    his.$save(function (data) {console.log(data);});
+                    his.$save();
                     return json;
                 }, function(response){
                     var his = new HistoryService();
                     his.content = response.status+" - GET (IRootResourceAdministrastion): "+response.statusText;
                     his.type = "ERROR";
-                    his.$save(function (data) {console.log(data);});
+                    his.$save();
                 });
                 return promise;
             }

@@ -9,13 +9,13 @@ services.factory('RootResourceService', ['$http', 'x2js', 'HistoryService', func
                     var his = new HistoryService();
                     his.content = response.status+" - GET (IRootResourceAdministrastion): "+response.statusText;
                     his.type = "INFO";
-                    his.$save(function (data) {console.log(data);});
+                    his.$save();
                     return json;
                 }, function(response){
                     var his = new HistoryService();
                     his.content = response.status+" - GET List (IRootResourceAdministrastion): "+response.statusText;
                     his.type = "ERROR";
-                    his.$save(function (data) {console.log(data);});
+                    his.$save();
                 });
                 return promise;
             },
@@ -23,19 +23,19 @@ services.factory('RootResourceService', ['$http', 'x2js', 'HistoryService', func
                 var promise = $http.put('rest/mqnaas/IRootResourceAdministration', data).then(function (response) {
                     // convert the data to JSON and provide
                     // it to the success function below
-                    //var x2js = new X2JS();
+                    var x2js = new X2JS();
                     console.log(response);
-//                    var json = x2js.xml_str2json(response.data);
+                    var json = x2js.xml_str2json(response.data);
                     var his = new HistoryService();
                     his.content = response.status+" - PUT (IRootResourceAdministrastion): "+response.data;
                     his.type = "INFO";
-                    his.$save(function (data) {console.log(data);});
-//                    return json;
+                    his.$save();
+                    return json;
                 }, function(response){
                     var his = new HistoryService();
                     his.content = response.status+" - PUT (IRootResourceAdministrastion): "+response.statusText;
                     his.type = "ERROR";
-                    his.$save(function (data) {console.log(data);});
+                    his.$save();
                 });
                 return promise;
             },
@@ -45,7 +45,7 @@ services.factory('RootResourceService', ['$http', 'x2js', 'HistoryService', func
                     var his = new HistoryService();
                     his.content = response.status+" - GET (IRootResourceAdministrastion): "+response.statusText;
                     his.type = "INFO";
-                    his.$save(function (data) {console.log(data);});
+                    his.$save();
                     return json;
                 }
                 );
@@ -62,7 +62,7 @@ services.factory('RootResourceService', ['$http', 'x2js', 'HistoryService', func
                     var his = new HistoryService();
                     his.content = response.status+" - DELETE (IRootResourceAdministrastion): "+response.data;
                     his.type = "INFO";
-                    his.$save(function (data) {console.log(data);});
+                    his.$save();
 //                    return json;
                 }
                 );
