@@ -20,6 +20,8 @@ module.exports = function (config) {
             'src/main/webapp/bower_components/angular-local-storage/dist/angular-local-storage.js',
             'src/main/webapp/bower_components/angular-x2js/dist/x2js.min.js',
             'src/main/webapp/bower_components/ng-table/ng-table.js ',
+            'src/main/webapp/bower_components/ngDialog/js/ngDialog.js ',
+            'http://jnuno.com/tree-model-js/vendor/jnuno/TreeModel.js',
 //            'src/main/webapp/bower_components/**/*.js',
 //            'src/main/webapp/bower_components/**/**/*.js',
 
@@ -45,6 +47,7 @@ module.exports = function (config) {
         reporters : ['progress', 'growl'],
         // list of files / patterns to exclude
         exclude: [
+            'src/main/webapp/bower_components/bootstrap/dist/js/bootstrap.js',
             'src/main/webapp/bower_components/bootstrap/dist/js/bootstrap.js'
         ],
 
