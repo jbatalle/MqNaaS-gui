@@ -7,12 +7,16 @@ services.factory('ServiceProviderService', ['$http', 'x2js', 'HistoryService', f
                 var promise = $http.get('rest/mqnaas/IServiceProvider/services?arg0='+id).then(function (response) {
                     var json = x2js.xml_str2json(response.data);
                     var his = new HistoryService();
-                    his.content = response.status+" - GET (IServiceProvider): "+response.statusText;
+                    his.content = response.status+" - GET List (IServiceProvider): "+response.statusText;
                     his.type = "INFO";
                     his.$save(function (data) {console.log(data);});
                     return json;
-                }
-                );
+                }, function(response){
+                    var his = new HistoryService();
+                    his.content = response.status+" - GET List (IServiceProvider): "+response.statusText;
+                    his.type = "ERROR";
+                    his.$save(function (data) {console.log(data);});
+                });
                 return promise;
             }
         };

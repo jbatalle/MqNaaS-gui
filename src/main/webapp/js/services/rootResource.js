@@ -11,8 +11,12 @@ services.factory('RootResourceService', ['$http', 'x2js', 'HistoryService', func
                     his.type = "INFO";
                     his.$save(function (data) {console.log(data);});
                     return json;
-                }
-                );
+                }, function(response){
+                    var his = new HistoryService();
+                    his.content = response.status+" - GET List (IRootResourceAdministrastion): "+response.statusText;
+                    his.type = "ERROR";
+                    his.$save(function (data) {console.log(data);});
+                });
                 return promise;
             },
             put: function (data) {
@@ -27,8 +31,12 @@ services.factory('RootResourceService', ['$http', 'x2js', 'HistoryService', func
                     his.type = "INFO";
                     his.$save(function (data) {console.log(data);});
 //                    return json;
-                }
-                );
+                }, function(response){
+                    var his = new HistoryService();
+                    his.content = response.status+" - PUT (IRootResourceAdministrastion): "+response.statusText;
+                    his.type = "ERROR";
+                    his.$save(function (data) {console.log(data);});
+                });
                 return promise;
             },
             get: function (id) {

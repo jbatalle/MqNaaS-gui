@@ -7,13 +7,13 @@ services.factory('MqNaaSResourceService', ['$http', 'x2js', 'HistoryService', fu
                 var promise = $http.get(genericUrl + url).then(function (response) {
                     var json = x2js.xml_str2json(response.data);
                     var his = new HistoryService();
-                    his.content = response.status+" - GET (IRootResourceAdministrastion): "+response.statusText;
+                    his.content = response.status+" - GET List (IRootResourceAdministrastion): "+response.statusText;
                     his.type = "INFO";
                     his.$save(function (data) {console.log(data);});
                     return json;
                 }, function(response){
                     var his = new HistoryService();
-                    his.content = response.status+" - GET (IRootResourceAdministrastion): "+response.statusText;
+                    his.content = response.status+" - GET List (IRootResourceAdministrastion): "+response.statusText;
                     his.type = "ERROR";
                     his.$save(function (data) {console.log(data);});
                 });
@@ -31,8 +31,12 @@ services.factory('MqNaaSResourceService', ['$http', 'x2js', 'HistoryService', fu
                     his.type = "INFO";
                     his.$save(function (data) {console.log(data);});
 //                    return json;
-                }
-                );
+                }, function(response){
+                    var his = new HistoryService();
+                    his.content = response.status+" - PUT (IRootResourceAdministrastion): "+response.statusText;
+                    his.type = "ERROR";
+                    his.$save(function (data) {console.log(data);});
+                });
                 return promise;
             },
             get: function (id) {
@@ -43,8 +47,12 @@ services.factory('MqNaaSResourceService', ['$http', 'x2js', 'HistoryService', fu
                     his.type = "INFO";
                     his.$save(function (data) {console.log(data);});
                     return json;
-                }
-                );
+                }, function(response){
+                    var his = new HistoryService();
+                    his.content = response.status+" - GET (IRootResourceAdministrastion): "+response.statusText;
+                    his.type = "ERROR";
+                    his.$save(function (data) {console.log(data);});
+                });
                 return promise;
             },
             remove: function (data) {
@@ -60,8 +68,12 @@ services.factory('MqNaaSResourceService', ['$http', 'x2js', 'HistoryService', fu
                     his.type = "INFO";
                     his.$save(function (data) {console.log(data);});
 //                    return json;
-                }
-                );
+                }, function(response){
+                    var his = new HistoryService();
+                    his.content = response.status+" - DELETE (IRootResourceAdministrastion): "+response.statusText;
+                    his.type = "ERROR";
+                    his.$save(function (data) {console.log(data);});
+                });
                 return promise;
             }
         };
