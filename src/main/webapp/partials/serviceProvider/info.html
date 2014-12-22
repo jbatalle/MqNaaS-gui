@@ -5,7 +5,7 @@
     <b>Parent {{parent._name}}:</b><br/> 
     <ul>
         <li ng-repeat="children in parent.service track by $index"> 
-            {{children}} 
+            {{children}} <a href="doAction/{{parent._name}}/{{children}}">Do something</a>
         </li>
     </ul>
 </div>
