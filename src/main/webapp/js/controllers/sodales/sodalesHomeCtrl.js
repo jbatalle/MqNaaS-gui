@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('openNaaSApp')
-        .controller('SodalesController', function ($scope, MqNaaSResourceService, $routeParams, localStorageService, ngDialog, RootResourceService) {
+        .controller('SodalesHomeCtrl', function ($scope, MqNaaSResourceService, $routeParams, localStorageService, ngDialog, RootResourceService) {
             var url = generateUrl("IRootResourceAdministration", $routeParams.id, "IRootResourceProvider");
             console.log(url);
             MqNaaSResourceService.list(url).then(function (data) {
