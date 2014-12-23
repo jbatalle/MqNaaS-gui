@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('openNaaSApp')
-        .controller('SodalesController', function ($scope, MqNaaSResourceService, $routeParams, localStorageService, ngDialog, RootResourceService) {
+        .controller('SodalesController', function ($scope, MqNaaSResourceService, $routeParams, localStorageService, ngDialog, RootResourceService, spService) {
             var url = generateUrl("IRootResourceAdministration", $routeParams.id, "IRootResourceProvider");
             console.log(url);
             MqNaaSResourceService.list(url).then(function (data) {
@@ -12,6 +12,10 @@ angular.module('openNaaSApp')
                 console.log($scope.data);
             });
 
+            spService.list().then(function (data) {
+                $scope.spSize = data.length;
+            });
+            
             $scope.deleteEntry = function (resourceName) {
                 console.log(resourceName);
                 MqNaaSResourceService.remove(resourceName).then(function (data) {
@@ -20,11 +24,11 @@ angular.module('openNaaSApp')
                 });
             };
 
-            $scope.arn = {endpoint : "http://fibratv.dtdns.net:41080"};
+            $scope.arn = {endpoint: "http://fibratv.dtdns.net:41080"};
             $scope.openARNDialog = function () {
-                $scope.arn = {endpoint : "asdasdsa"};
+                $scope.arn = {endpoint: "asdasdsa"};
                 ngDialog.open({template: 'partials/sodales/arnDialog.html'});
-                
+
             };
             $scope.createNetwork = function () {
                 var NETWORK = getNETWORK();
@@ -36,12 +40,12 @@ angular.module('openNaaSApp')
                     console.log($scope.data);
                 });
             };
-            
+
             $scope.createTSON = function () {
                 var TSON = getTSON();
 //                var x2js = new X2JS();
 //                var json = x2js.xml_str2json(TSON);
-var json = TSON;
+                var json = TSON;
                 console.log(json);
                 var net = "Network-Internal-1.0-2";
                 url = generateUrl("IRootResourceAdministration", net, "IRootResourceAdministration");
@@ -50,8 +54,8 @@ var json = TSON;
                     console.log($scope.data);
                 });
             };
-            
-            $scope.addARN = function (data){
+
+            $scope.addARN = function (data) {
                 console.log("Adding ARN");
                 console.log(data);
                 var ARN = getARN(data.endpoint);
