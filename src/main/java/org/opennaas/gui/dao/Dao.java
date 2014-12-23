@@ -10,7 +10,7 @@ public interface Dao<T extends Entity, I> {
 
     T find(I id);
 
-    T save(T historyEntry);
+    T save(T entry);
 
     void delete(I id);
 

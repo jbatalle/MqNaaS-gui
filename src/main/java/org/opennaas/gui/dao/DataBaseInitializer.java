@@ -1,7 +1,11 @@
 package org.opennaas.gui.dao;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.opennaas.gui.dao.history.HistoryEntryDao;
+import org.opennaas.gui.dao.serviceProvider.ServiceProviderDao;
 import org.opennaas.gui.dao.user.UserDao;
+import org.opennaas.gui.entity.ServiceProvider;
 import org.opennaas.gui.entity.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -12,7 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  */
 public class DataBaseInitializer {
 
-    private HistoryEntryDao historyEntryDao;
+    private ServiceProviderDao serviceProviderDao;
 
     private UserDao userDao;
 
@@ -22,9 +26,9 @@ public class DataBaseInitializer {
         /* Default constructor for reflection instantiation */
     }
 
-    public DataBaseInitializer(UserDao userDao, HistoryEntryDao historyEntryDao, PasswordEncoder passwordEncoder) {
+    public DataBaseInitializer(UserDao userDao, ServiceProviderDao serviceProvidersDao, PasswordEncoder passwordEncoder) {
         this.userDao = userDao;
-        this.historyEntryDao = historyEntryDao;
+        this.serviceProviderDao = serviceProvidersDao;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -38,5 +42,11 @@ public class DataBaseInitializer {
         adminUser.addRole("admin");
         this.userDao.save(adminUser);
 
+        ServiceProvider sp = new ServiceProvider();
+        sp.setName("SP1");
+        List<String> vi = new ArrayList<String>();
+        vi.add("vi-1");
+        sp.setVi(vi);
+        this.serviceProviderDao.save(sp);
     }
 }
