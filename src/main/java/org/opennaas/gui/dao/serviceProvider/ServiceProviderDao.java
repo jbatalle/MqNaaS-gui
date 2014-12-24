@@ -12,5 +12,6 @@ import org.opennaas.gui.entity.ServiceProvider;
 public interface ServiceProviderDao extends Dao<ServiceProvider, Long>{
 
     public void add(Long id, String viId);
+    public void delete(Long id, String viId);
 
 }

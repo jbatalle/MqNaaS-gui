@@ -43,7 +43,16 @@ public class JpaServiceProviderDao extends JpaDao<ServiceProvider, Long> impleme
     public void add(Long id, String viId) {
         ServiceProvider entity = this.find(id);
         entity.getVi().add(viId);
-//        this.getEntityManager().merge(entity);
+        this.getEntityManager().persist(entity);
+        this.getEntityManager().flush();
+
+    }
+    
+    @Override
+    @Transactional
+    public void delete(Long id, String viId) {
+        ServiceProvider entity = this.find(id);
+        entity.getVi().remove(viId);
         this.getEntityManager().persist(entity);
         this.getEntityManager().flush();
 

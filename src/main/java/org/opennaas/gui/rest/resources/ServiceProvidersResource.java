@@ -107,6 +107,14 @@ public class ServiceProvidersResource {
 
         this.serviceProvidersDao.add(id, viId);
     }
+    
+    @DELETE
+    @Path("{id}/vi/{viId}")
+    public void removeVI(@PathParam("id") Long id, @PathParam("viId")String viId) {
+        this.logger.info("add vi(id, viId)");
+
+        this.serviceProvidersDao.delete(id, viId);
+    }
 
     private boolean isAdmin() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
