@@ -2,7 +2,6 @@ package org.opennaas.gui.dao;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.opennaas.gui.dao.history.HistoryEntryDao;
 import org.opennaas.gui.dao.serviceProvider.ServiceProviderDao;
 import org.opennaas.gui.dao.user.UserDao;
 import org.opennaas.gui.entity.ServiceProvider;
@@ -48,5 +47,7 @@ public class DataBaseInitializer {
         vi.add("vi-1");
         sp.setVi(vi);
         this.serviceProviderDao.save(sp);
+        
+        this.serviceProviderDao.add((long) 1, "vi-2");
     }
 }

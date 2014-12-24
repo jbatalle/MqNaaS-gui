@@ -100,9 +100,7 @@ public class ServiceProvidersResource {
         this.serviceProvidersDao.delete(id);
     }
     
-    @POST
-    @Consumes(MediaType.TEXT_PLAIN)
-    @Produces(MediaType.APPLICATION_JSON)
+    @GET
     @Path("{id}/vi/{viId}")
     public void addVI(@PathParam("id") Long id, @PathParam("viId")String viId) {
         this.logger.info("add vi(id, viId)");

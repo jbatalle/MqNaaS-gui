@@ -10,6 +10,7 @@ import javax.persistence.criteria.Root;
 
 import org.opennaas.gui.dao.JpaDao;
 import org.opennaas.gui.entity.ServiceProvider;
+import org.springframework.transaction.annotation.Propagation;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,11 +39,14 @@ public class JpaServiceProviderDao extends JpaDao<ServiceProvider, Long> impleme
     }
 
     @Override
+    @Transactional
     public void add(Long id, String viId) {
-        EntityManager entity = this.getEntityManager();
-        ServiceProvider t = this.find(id);
-        t.getVi().add(viId);
-        entity.merge(t);
+        ServiceProvider entity = this.find(id);
+        entity.getVi().add(viId);
+//        this.getEntityManager().merge(entity);
+        this.getEntityManager().persist(entity);
+        this.getEntityManager().flush();
+
     }
 
 }
