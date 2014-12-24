@@ -62,6 +62,21 @@ services.factory('spService', ['$http', 'x2js', 'HistoryService', function ($htt
                     his.$save();
                 });
                 return promise;
+            },
+            removeVIOfSP: function (spId, viId) {
+                var promise = $http.delete("rest/sp/"+spId+"/vi/"+viId).then(function (response) {
+                    var his = new HistoryService();
+                    his.content = response.status+" - REMOVE (Create Service Provider): "+response.data;
+                    his.type = "INFO";
+                    his.$save();
+                    return response.data;
+                }, function(response){
+                    var his = new HistoryService();
+                    his.content = response.status+" - REMOVE (Create Service Provider): "+response.statusText;
+                    his.type = "ERROR";
+                    his.$save();
+                });
+                return promise;
             }
         };
     }]);
