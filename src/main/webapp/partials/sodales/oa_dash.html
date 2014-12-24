@@ -1,15 +1,23 @@
 
-<h3>SODALES</h3>
+<h3>SODALES OpenAccess DASH</h3>
 
-<br/>Availables Root resources: <br/>
-<li ng-repeat="resource in data.IRootResource.IRootResourceId" ng-init="id=$index;">
-    {{id}}: <b>{{resource}}</b> 
-    <a href="#!/infoResource/{{resource}}" class="btn btn-xs btn-default" title="Info Resource"><span class="glyphicon glyphicon-search"></span></a>
-    <a href="#!/listServices/{{resource}}" class="btn btn-xs btn-default" title="List Services"><span class="glyphicon glyphicon-search"></span></a>
-    <a href="#!/info/{{resource}}" class="btn btn-xs btn-default" title="info"><span class="glyphicon glyphicon-search"></span></a>
-    <a href="" ng-click="deleteEntry(resource)" class="btn btn-xs btn-default" title="delete"><span class="glyphicon glyphicon-trash"></span></a>
-</li>
+<br/>List of Service Providers <br/>
 
-<a href="" ng-click="openARNDialog()">Create ARN</a>
-<a href="" ng-click="createNetwork()">Create Network</a>
-<a href="" ng-click="createTSON()">Create TSON</a>
+<div class="pull-right">
+    <button ng-click="tableParams.reload()" class="btn btn-default">Reload</button>
+    <button ng-click="tableParams.sorting({})" class="btn btn-default">Clear sorting</button>
+</div>
+<table ng-table="tableParams" class="table ng-table-responsive">
+    <tr ng-repeat="iface in $data">
+        <td data-title="'Service Provider name'" sortable="'date'" class="col-sm-2 col-md-2 col-lg-2">{{iface.name}}</td>
+        <td data-title="'Created date'" sortable="'date'" class="col-sm-2 col-md-2 col-lg-2">{{iface.date| date:'yyyy-MM-dd HH:mm:ss'}}</td>
+        <td data-title="'VI List'" sortable="'date'" class="col-sm-2 col-md-2 col-lg-2">{{iface.vi}}</td>
+        <td data-title="'Add VI'" sortable="'type'" class="col-sm-1 col-md-1 col-lg-1">
+            <select ng-model="selectedVi" ng-options="item as item.name for item in listVi"></select>
+            <a href="" ng-click="addVI(iface.id, selectedVi)" title="View">Add</a>
+        </td>
+    </tr>
+</table>
+
+<a href="" ng-click="openSPCreationDialog()">Add new Service Provider</a>
+
