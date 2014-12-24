@@ -49,7 +49,7 @@ services.factory('spService', ['$http', 'x2js', 'HistoryService', function ($htt
                 return promise;
             },
             addViToSP: function (spId, viId) {
-                var promise = $http.post("rest/sp/"+spId+"/vi/"+viId).then(function (response) {
+                var promise = $http.get("rest/sp/"+spId+"/vi/"+viId).then(function (response) {
                     var his = new HistoryService();
                     his.content = response.status+" - POST (Create Service Provider): "+response.data;
                     his.type = "INFO";
