@@ -24,13 +24,11 @@ public class MqNaaSResource {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-//    @Produces(MediaType.APPLICATION_XML)
     @GET
     @Path("/{res1:.*}")
     public @ResponseBody
     String get(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, RestServiceException, ServletException {
         this.logger.info("GET()");
-        String url = "http://admin:123456@localhost:9000/mqnaas/IRootResourceProvider";
         logger.info("URI: " + (String) request.getAttribute("uri"));
         HttpServletRequest req = (HttpServletRequest) request;
         request.setAttribute("uri", req.getRequestURI().substring(req.getContextPath().length()));
@@ -39,32 +37,6 @@ public class MqNaaSResource {
         request.getRequestDispatcher("/ProxyServlet").forward(request, response);
 
         return "";
-        /*        logger.error(request.getContextPath());
-         logger.error(request.getPathInfo());
-         logger.error(request.getQueryString());
-         logger.error(request.getServletPath());
-         logger.error(request.getRequestURI());
-         logger.error(request.getRequestURL().toString());
-         Enumeration hed = request.getHeaderNames();
-         while(hed.hasMoreElements()){
-         String keyHeader = (String) hed.nextElement();
-         logger.error(keyHeader);
-         Enumeration headerValues = request.getHeaders(keyHeader);
-         while(headerValues.hasMoreElements()){
-         String valueHeader = (String) headerValues.nextElement();
-         logger.error(valueHeader);
-         }
-         List headerValuesList=Collections.list(headerValues);
-         }
-
-         String response2 = clientJersey.get(path, request);
-         */
-        //HttpHeaders hH = req.getHeaders();
-//        List<org.springframework.http.MediaType> accept = hH.getAccept();
-//        org.springframework.http.MediaType contentType = hH.getContentType();
-//        logger.error("Cotnenttype: "+contentType.getType());
-//        logger.error("Cotnenttype: "+contentType.getSubtype());
-        //return response2;
     }
     /*
      @POST
@@ -80,14 +52,12 @@ public class MqNaaSResource {
      }*/
 
     @PUT
-//    @Consumes(MediaType.APPLICATION_XML)
-//    @Produces(MediaType.TEXT_PLAIN)
     @Path("/{res1:.*}")
     public @ResponseBody
     void put(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, RestServiceException, ServletException {
         this.logger.info("PUT() ");
 
-        String body = null;
+        String body = "";
         StringBuilder stringBuilder = new StringBuilder();
         BufferedReader bufferedReader = null;
         try {
@@ -130,10 +100,7 @@ public class MqNaaSResource {
     @DELETE
     @Path("/{res1:.*}")
     public void delete(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, RestServiceException, ServletException {
-        this.logger.info("DELETE() ");
-        String url = "http://admin:123456@localhost:9000/mqnaas/IRootResourceProvider";
-        logger.info("URI: " + (String) request.getAttribute("uri"));
-
+        this.logger.info("DELETE() URI: " + (String) request.getAttribute("uri"));
         HttpServletRequest req = (HttpServletRequest) request;
         request.setAttribute("uri", req.getRequestURI().substring(req.getContextPath().length()));
         request.setAttribute("path", request.getPathInfo());
