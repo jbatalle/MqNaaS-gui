@@ -10,15 +10,7 @@ angular.module('openNaaSApp', ['ngResource', 'ngRoute', 'ngCookies', 'openNaaSAp
         ['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 
                 $routeProvider
-                        /*                                .when('/create', {
-                         templateUrl: 'partials/create.html',
-                         controller: CreateController
-                         })
-                         .when('/edit/:id', {
-                         templateUrl: 'partials/edit.html',
-                         controller: EditController
-                         })
-                         */.when('/login', {
+                        .when('/login', {
                             templateUrl: 'partials/login.html',
                             controller: 'LoginController'
                         })
@@ -84,6 +76,10 @@ angular.module('openNaaSApp', ['ngResource', 'ngRoute', 'ngCookies', 'openNaaSAp
                             template: " ", // just fire controller
                             controller: 'CrawlerResourceController',
                             animation: 'slide'
+                        })
+                        .when('/sodales_oa_dash', {
+                            templateUrl: 'partials/sodales/oa_dash.html',
+                            controller: 'SodalesOpenaccessDashCtrl'
                         })
                         .otherwise({
                             templateUrl: 'partials/index.html',

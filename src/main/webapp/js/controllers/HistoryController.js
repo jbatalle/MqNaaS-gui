@@ -7,7 +7,6 @@ angular.module('openNaaSApp')
 //            $scope.data = HistoryService.query(); //fetch all movies. Issues a GET to /api/movies
 
             var data = HistoryService.query({}, function (result) {
-                console.log("SUICCESS");
                 $scope.tableParams.reload();
             });
 
