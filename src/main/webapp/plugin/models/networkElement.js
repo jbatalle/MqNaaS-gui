@@ -5,6 +5,8 @@
 addJSFile('../plugin/models/ports.js');
 addJSFile('../plugin/models/OfSwitch.js');
 addJSFile('../plugin/models/Router.js');
+addJSFile('../plugin/models/arn.js');
+addJSFile('../plugin/models/cpe.js');
 
 function NetworkElement(name, data, ports) {
     this.name = name;
