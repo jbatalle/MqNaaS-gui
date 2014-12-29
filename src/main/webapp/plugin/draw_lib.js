@@ -479,7 +479,7 @@ console.log("Mouseup");
 
         // Restart the force layout.
         force.start();
-    }
+    };
 
     // Make it all go
     update();

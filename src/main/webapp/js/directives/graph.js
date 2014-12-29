@@ -1,24 +1,24 @@
 'use strict';
 
 angular.module('openNaaSApp')
-        .directive('grapheditor', function() {
+        .directive('grapheditor', function () {
             return {
                 restrict: 'EA',
                 scope: {},
                 templateUrl: 'partials/d3/editor.html',
-                link: function(scope, element, attrs) {
+                link: function (scope, element, attrs) {
                     console.log("Editor");
-                    createStencil();
+//                    createStencil();
                     graph = new myGraph("#graph");
 
                 }};
         })
-        .directive('graphview', function() {
+        .directive('graphview', function () {
             return {
                 restrict: 'EA',
                 scope: {},
                 templateUrl: 'partials/d3/view.html',
-                link: function(scope, element, attrs) {
+                link: function (scope, element, attrs) {
                     console.log("View");
                     graph = new myGraph("#graph");
 
@@ -100,25 +100,23 @@ angular.module('openNaaSApp')
                     }
                 }};
         })
-        .directive('droppable', ['$window', '$rootScope', function($window, $rootScope) {
+        .directive('droppable', ['$window', '$rootScope', function ($window, $rootScope) {
                 return {
                     // A = attribute, E = Element, C = Class and M = HTML Comment
-                    restrict: 'A',
-                    link: function(scope, element, attrs) {
+                    restrict: 'AE',
+                    link: function (scope, element, attrs) {
                         element.droppable({
-                            drop: function(e, ui) {
-                                console.log(e);
-                                console.log(angular.element(ui.draggable).parent());
-                                console.log(angular.element(ui.draggable).parent().context);
-                                console.log(angular.element(ui.draggable).parent().context.id);
+                            drop: function (e, ui) {
+                                var $newPosX = ui.offset.left - $(this).offset().left;
+                                var $newPosY = ui.offset.top - $(this).offset().top;
                                 var nodeType = angular.element(ui.draggable).parent().context.id;
 
                                 var divPos = {};
                                 var $div = $("#graph");
                                 //    var e = window.event;
                                 divPos = {//position where the element is dropped
-                                    x: e.clientX,
-                                    y: e.clientY
+                                    x: $newPosX,
+                                    y: $newPosY
                                 };
                                 console.log(divPos);
                                 createElement(nodeType, divPos);
@@ -136,163 +134,32 @@ angular.module('openNaaSApp')
                                 }
                                 scope.$apply();
                             }
-                        })
+                        });
                     }
-                    /*
-                     var el = element[0];
-                     console.log("Dropable");
-                     console.log($window);
-                     var w = angular.element($window);
-                     console.log(w);
-                     console.log(el);
-                     console.log(element.position());
-                     el.addEventListener(
-                     'dragstart',
-                     function(e) {
-                     console.log(e);
-                     console.log(e.target);
-                     //                                console.log("ADDDDDDDDDDDDDDDDDDDD");
-                     this.classList.add('over');
-                     return false;
-                     },
-                     false
-                     );
-                     el.addEventListener(
-                     'dragenter',
-                     function(e) {
-                     console.log(e.dataTransfer);
-                     console.log(e.dataTransfer.srcElement);
-                     console.log(e);
-                     console.log(e.srcElement);
-                     console.log(e.source);
-                     console.log(e.target);
-                     //                                console.log("ADDDDDDDDDDDDDDDDDDDD");
-                     this.classList.add('over');
-                     return false;
-                     },
-                     false
-                     );
-                     
-                     el.addEventListener(
-                     'dragleave',
-                     function(e) {
-                     console.log(e);
-                     var id = attrs.id;
-                     if (attrs.id != undefined) {
-                     console.log(attrs.id);
-                     console.log(angular.element(el).attr("id", id));
-                     }
-                     console.log(scope);
-                     console.log(attrs);
-                     console.log(e);
-                     console.log(element);
-                     console.log($rootScope.srcIdType);
-                     //                                    var nodeType = ui.draggable.attr("id"); //select the id of the element
-                     var divPos = {};
-                     var $div = $("#graph");
-                     //    var e = window.event;
-                     divPos = {//position where the element is dropped
-                     x: e.layerX,
-                     y: e.layerY
-                     };
-                     //                                    createElement(nodeType, divPos);
-                     this.classList.remove('over');
-                     return false;
-                     },
-                     false
-                     );
-                     
-                     element.draggable({
-                     revert: true,
-                     start: function(event, ui) {
-                     console.log("AAAAAAAAAAA");
-                     },
-                     stop: function(event, ui) {
-                     }
-                     })
-                     }*/
-                }
+                };
             }])
 
-        .directive('draggable', ['$window', '$rootScope', function($window, $rootScope) {
+        .directive('draggable', ['$window', '$rootScope', function ($window, $rootScope) {
                 return {
                     // A = attribute, E = Element, C = Class and M = HTML Comment
-                    restrict: 'A',
-                    link: function(scope, element, attrs) {
+                    restrict: 'AE',
+                    link: function (scope, element, attrs) {
                         var el = element[0];
-                        console.log("Draggable");
-                        console.log($window);
                         var w = angular.element($window);
-                        console.log(w);
-                        console.log(el);
-                        console.log(element.position());
-                        el.addEventListener(
-                                'dragstart',
-                                function(e) {
-                                    console.log(e);
-                                    console.log(e.target);
-//                                console.log("ADDDDDDDDDDDDDDDDDDDD");
-                                    this.classList.add('over');
-                                    return false;
-                                },
-                                false
-                                );
-                        el.addEventListener(
-                                'dragenter',
-                                function(e) {
-                                    console.log(e.dataTransfer);
-                                    console.log(e);
-                                    console.log(e.source);
-                                    console.log(e.target);
-//                                console.log("ADDDDDDDDDDDDDDDDDDDD");
-                                    this.classList.add('over');
-                                    return false;
-                                },
-                                false
-                                );
-
-                        el.addEventListener(
-                                'dragleave',
-                                function(e) {
-                                    console.log(e);
-                                    var id = attrs.id;
-                                    if (attrs.id != undefined) {
-                                        console.log(attrs.id);
-                                        console.log(angular.element(el).attr("id", id));
-                                    }
-                                    console.log(scope);
-                                    console.log(attrs);
-                                    console.log(e);
-                                    console.log(element);
-
-//                                    var nodeType = ui.draggable.attr("id"); //select the id of the element
-                                    var divPos = {};
-                                    var $div = $("#graph");
-                                    //    var e = window.event;
-
-                                    divPos = {//position where the element is dropped
-                                        x: e.layerX,
-                                        y: e.layerY
-                                    };
-
-//                                    createElement(nodeType, divPos);
-                                    this.classList.remove('over');
-                                    return false;
-                                },
-                                false
-                                );
-
                         element.draggable({
                             revert: true,
-                            start: function(event, ui) {
-                                console.log("AAAAAAAAAAA");
+                            start: function (event, ui) {
+                                console.log("Start dragging");
                                 console.log(event);
                                 console.log(ui);
                                 console.log(event.target.id);
                             },
-                            stop: function(event, ui) {
+                            stop: function (event, ui) {
+                                console.log("Stop dragging");
+                                console.log(event);
+                                console.log(ui);
                             }
-                        })
+                        });
                     }
                 };
             }]);
