@@ -18,6 +18,7 @@ module.exports = function (config) {
             'src/main/webapp/bower_components/angular-resource/angular-resource.js',
             'src/main/webapp/bower_components/angular-cookies/angular-cookies.js',
             'src/main/webapp/bower_components/angular-local-storage/dist/angular-local-storage.js',
+            'src/main/webapp/bower_components/x2js/xml2json.js',
             'src/main/webapp/bower_components/angular-x2js/dist/x2js.min.js',
             'src/main/webapp/bower_components/ng-table/ng-table.js ',
             'src/main/webapp/bower_components/ngDialog/js/ngDialog.js ',
