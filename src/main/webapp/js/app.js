@@ -81,6 +81,10 @@ angular.module('openNaaSApp', ['ngResource', 'ngRoute', 'ngCookies', 'openNaaSAp
                             templateUrl: 'partials/sodales/oa_dash.html',
                             controller: 'SodalesOpenaccessDashCtrl'
                         })
+                        .when('/viList', {
+                            templateUrl: 'partials/createVI/index.html',
+                            controller: 'listVIController'
+                        })
                         .otherwise({
                             templateUrl: 'partials/index.html',
                             //controller: IndexController
