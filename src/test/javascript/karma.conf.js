@@ -22,7 +22,7 @@ module.exports = function (config) {
             'src/main/webapp/bower_components/angular-x2js/dist/x2js.min.js',
             'src/main/webapp/bower_components/ng-table/ng-table.js ',
             'src/main/webapp/bower_components/ngDialog/js/ngDialog.js ',
-            'http://jnuno.com/tree-model-js/vendor/jnuno/TreeModel.js',
+            'src/main/webapp/bower_components/tree-model-bower/TreeModel.js',
 //            'src/main/webapp/bower_components/**/*.js',
 //            'src/main/webapp/bower_components/**/**/*.js',
 
@@ -30,6 +30,7 @@ module.exports = function (config) {
             'src/main/webapp/js/**/*.js',
             'src/test/javascript/**/*.js',
             'src/test/javascript/spec/controllers/HistoryController_test.js'
+            
 //            'src/test/javascript/**/!(karma.conf).js'
         ],
 
