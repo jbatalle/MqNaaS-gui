@@ -1,5 +1,4 @@
 
-{{data}}
 <div class="page-header">
     <h3>Virtual Infrastructure requests:</h3>
 </div>
@@ -12,7 +11,7 @@
     <tr ng-repeat="vi in $data track by $index">
         <td data-title="'Id'" sortable="'id'" class="col-sm-1 col-md-1 col-lg-1">{{vi}}</td>
         <td data-title="'Action'" class="col-sm-2 col-md-2 col-lg-2">
-            <a href="#!/editVIRequest" class="btn btn-default" title="Create">Edit</a>
+            <a href="#!/editVIRequest/{{vi}}" class="btn btn-default" title="edit">Edit</a>
         </td>
         <td data-title="'Remove'" class="col-sm-1 col-md-1 col-lg-1">Remove</td>
     </tr>

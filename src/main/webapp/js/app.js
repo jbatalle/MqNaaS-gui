@@ -85,6 +85,10 @@ angular.module('openNaaSApp', ['ngResource', 'ngRoute', 'ngCookies', 'openNaaSAp
                             templateUrl: 'partials/createVI/index.html',
                             controller: 'listVIController'
                         })
+                        .when('/editVIRequest/:id', {
+                            templateUrl: 'partials/createVI/editor.html',
+                            controller: 'editVIController'
+                        })
                         .otherwise({
                             templateUrl: 'partials/index.html',
                             //controller: IndexController

@@ -1,17 +1,16 @@
 'use strict';
 
 angular.module('openNaaSApp')
-        .controller('listVIController', function ($scope, MqNaaSResourceService, $filter, ngTableParams, x2js) {
+        .controller('listVIController', function ($scope, MqNaaSResourceService, $filter, ngTableParams) {
             console.log("LIST VI");
             var urlListVI = "IRootResourceAdministration/Network-Internal-1.0-2/IRequestManagement";
             $scope.data = [];
-            MqNaaSResourceService.list(urlListVI).then(function(result){
+            MqNaaSResourceService.list(urlListVI).then(function (result) {
                 console.log(result);
                 $scope.data = result.IResource.IResourceId;
                 $scope.tableParams.reload();
 //                return result.IResource;
             });
-console.log($scope.data);
             $scope.tableParams = new ngTableParams({
                 page: 1, // show first page
                 count: 10, // count per page
@@ -21,13 +20,6 @@ console.log($scope.data);
             }, {
                 total: $scope.data.length,
                 getData: function ($defer, params) {
-//                    data = '<IResource><IResourceId>req-1</IResourceId><IResourceId>req-2</IResourceId></IResource>';
-//                    data = '<IResource><IResourceId>req-1</IResourceId></IResource>';
-//                    data = x2js.xml_str2json(data);
-//                    data = data.IResource.IResourceId;
-//data  = data.$$state.value.IResource;
-console.log($scope.data);
-//                    console.log(data);
                     var data = checkIfIsArray($scope.data);
                     console.log(data);
                     var orderedData = params.sorting() ? $filter('orderBy')(data, params.orderBy()) : data;
@@ -38,18 +30,25 @@ console.log($scope.data);
             $scope.createVIRequest = function () {
                 var urlCreateVI = "IRootResourceAdministration/Network-Internal-1.0-2/IRequestManagement";
                 MqNaaSResourceService.put(urlCreateVI).then(function (result) {
+                    $scope.data.push(result);
                     $scope.tableParams.reload();
                 });
             };
         })
-        .controller('editVIController', function ($scope, MqNaaSResourceService) {
+        .controller('editVIController', function ($scope, MqNaaSResourceService, $routeParams) {
+            console.log("Edit VI : " + $routeParams.id);
+            $scope.viId = $routeParams.id;
+
+            var urlPeriod = "IRootResourceAdministration/Network-Internal-1.0-2/IRequestManagement/" + $scope.viId + "/IRequestAdministration/period";
+            MqNaaSResourceService.get(urlPeriod).then(function (result) {
+                $scope.period = result;
+            });
+
+            $scope.setPeriod = function (start, end) {
+                var urlPeriod = "IRootResourceAdministration/Network-Internal-1.0-2/IRequestManagement/" + $scope.viId + "/IRequestAdministration/period";
+                var period = getPeriod(949359600, 980895600);//xml
+                MqNaaSResourceService.put(urlPeriod, period).then(function () {//the response is empty
+                });
+            };
 
         });
-
-function checkIfIsArray(possibleArray) {
-    if (possibleArray instanceof Array) {
-        return possibleArray;
-    } else {
-        return [possibleArray];
-    }
-}

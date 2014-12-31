@@ -1,18 +1,23 @@
-
-<div class="pull-right">
-    <!--<a href="#!/create" class="btn btn-default" ng-show="hasRole('admin')" title="Create"><span class="glyphicon glyphicon-plus"></span></a>-->
-    <a href="#!/createVIRequest" class="btn btn-default" title="Create"><span class="glyphicon glyphicon-plus"></span></a>
+<div class="row">
+    <div class="col-md-3">
+        <p class="lead">AVAILABLE resources</p>
+        <div class="list-group">
+            <a href="" ng-click="selectedResource('ARN')" class="list-group-item" ng-class="ARNactive">ARN</a>
+            <a href="" ng-click="selectedResource('CPE')" class="list-group-item" ng-class="CPEactive">CPE</a>
+        </div>
+        <div>
+            VI Settings. COnfig, period...
+        </div>
+    </div>
+    <div class="col-md-9">
+        <h2 class="page-header">Editing request: {{viId}}</h2>
+        <div>
+            <table border="1">
+                <tr>
+                    <td>DisYellow Bytes</td>
+                </tr>
+            </table>
+        </div>
+        <!-- /.row -->
+    </div>
 </div>
-<div class="page-header">
-    <h3>List VI request:</h3>
-</div>
-<button ng-click="tableParams.reload()" class="btn btn-default">Reload</button>
-
-<table ng-table="tableParams" class="table ng-table-responsive">
-    <tr ng-repeat="vi in $data">
-        <td data-title="'Id'" sortable="'date'" class="col-sm-2 col-md-2 col-lg-2">{{vi.id}}</td>
-        <td data-title="'Action'" sortable="'type'" class="col-sm-1 col-md-1 col-lg-1">Edit</td>
-        <td data-title="'Remove'">Remove</td>
-    </tr>
-</table>
-
