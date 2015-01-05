@@ -1,7 +1,5 @@
-MQNaaS GUI
+SODALES y2 review GUI
 ================
-
-Future OpenNaaS GUI
 
 Technologies
 ------------
