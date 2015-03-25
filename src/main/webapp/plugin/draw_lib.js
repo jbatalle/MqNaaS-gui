@@ -57,16 +57,16 @@ console.log(nodes);
         }
         nodes.splice(findNodeIndex(id),1);
         update();
-    }
+    };
 
     this.addLink = function (source, target) {
 console.log("add link");
         console.log(findNode(source));
-
+update();
         links.push({id: source+"-"+target, source:findNode(source), target:findNode(target)});
         console.log(links);
         update();
-    }
+    };
 
     this.addLinkBetweenPorts = function (source, target) {
         console.log(nodes);
@@ -77,7 +77,7 @@ console.log("add link between ports");
         links.push({id: source+"-"+target, source:findPortNode(source), target:findPortNode(target)});
         console.log(links);
         update();
-    }
+    };
 
     this.removeLink = function (id) {
         links.splice(findLinkIndex(id),1);
@@ -115,10 +115,14 @@ console.log("add link between ports");
 
     var findLinkIndex = function(id) {
         for (var i in links) {if (links[i]["id"] === id) return i};
-    }
+    };
 
     this.getNodes = function() {
         return nodes;
+    }
+    
+    this.setNodes = function(newNodes) {
+        nodes = newNodes;
     }
 
     this.getNode = function(nodeId) {
@@ -277,6 +281,44 @@ var zoom = d3.behavior.zoom()
             .attr("dy", function(d){ return d.text_y})
             .text(function(d) {return d.id});
         
+        nodeEnter.on("mousedown", function(d){
+            //if is a Virtual Resource
+            if (!ctrlKey) {
+                    console.log("Click on node "+d.name);
+//                    var parentNode = graph.getNodes().filter(function (p) { return d.parent == p.id})[0];
+                    var parentNode = graph.getNodes().filter(function (p) { return d.name == p.name})[0];;
+console.log(parentNode);
+                    startState = d, endState = undefined;
+console.log(parentNode.x);
+console.log(d);
+console.log(d.x);
+                    //startState = node;
+console.log("Change X "+(parentNode.x+d.posx));
+                    startState.x = (parentNode.x);
+                    startState.y = (parentNode.y);
+                    startState.testx = (parentNode.x);
+                    startState.testy = (parentNode.y);
+                    startState.transitions = [];
+                    nodeMouseDown(startState);
+                    console.log(startState);
+                }
+        });
+        nodeEnter.on("mouseup", function(d){
+            //if is a Virtual Resource
+            if (!ctrlKey) {
+            var parentNode = graph.getNodes().filter(function (p) { return d.name == p.name})[0];
+            console.log(parentNode);
+console.log(node);
+                    endState = d;
+
+                    //startState = node;
+console.log("Change X "+(parentNode.x));
+                    endState.x = (parentNode.x);
+                    endState.y = (parentNode.y);
+                    endState.transitions = [];
+                    nodeMouseUpMapping(endState);
+                }
+        });
         nodeEnter.on("contextmenu", function(d, index) {
              if(contextMenuShowing) {
                 d3.event.preventDefault();
@@ -295,10 +337,36 @@ var zoom = d3.behavior.zoom()
                     .attr("class", "popup_context_menu")
                     .style("left", mousePosition[0] + "px")
                     .style("top", mousePosition[1] + "px");
-                popup.append("h2").text(d.name);
-                popup.append("p").text("Id: "+d.id).append("p")
-                    .append("p").text("Ports: "+d.ports.length)
-                    .append("p").append("a")
+                popup.append("h4").text(d.name);
+                
+console.log(d);
+if( window.location.hash.split("/")[1] === "spVIInfo"){
+                if(d.type === "arn"){
+                    popup.append("p").text("Available actions:");
+                    popup.append("p").text("NetworkService:")
+                            popup.append("a").text("Create ").on("mousedown", function(){/*callOperation(d.id, d.type, 0)*/;})
+                            popup.append("a").text("Remove  ").on("mousedown", function(){/*callOperation(d.id, d.type, 1)*/;})
+                            popup.append("a").text("List").on("mousedown", function(){/*callOperation(d.id, d.type, 2)*/;})
+                    popup.append("p").text("ClientService:")
+                            popup.append("a").text("Create ").on("mousedown", function(){/*callOperation(d.id, d.type, 0)*/;})
+                            popup.append("a").text("Remove  ").on("mousedown", function(){/*callOperation(d.id, d.type, 1)*/;})
+                            popup.append("a").text("List").on("mousedown", function(){/*callOperation(d.id, d.type, 2)*/;})
+                    popup.append("p").text("Service:")
+                            popup.append("a").text("Create ").on("mousedown", function(){callOperation(d.id, d.type, 0);})
+                            popup.append("a").text("Remove  ").on("mousedown", function(){callOperation(d.id, d.type, 1);})
+                            popup.append("a").text("List").on("mousedown", function(){/*callOperation(d.id, d.type, 2)*/;})
+                } else if(d.type === "cpe"){
+                    popup.append("p").text("Available actions:");
+                    popup.append("p").text("VLANConnectivityService: ")
+                            popup.append("a").text("Create ").on("mousedown", function(){callOperation(d.id, d.type, 0);})
+                            popup.append("a").text("Remove  ").on("mousedown", function(){callOperation(d.id, d.type, 1);})
+                            popup.append("a").text("List").on("mousedown", function(){/*callOperation(d.id, d.type, 2)*/;})
+                    //.attr({"xlink:href": "", "ng-Click":"openOperationARNDialog()"});
+                }
+            }else{
+                popup.append("p").text("Ports: "+d.ports.length)
+            }
+/*                    .append("p").append("a")
                     .attr({"xlink:href": "#"})
                     .on("mousedown", function(){
                         port_num = d.ports.length+1;
@@ -306,16 +374,24 @@ var zoom = d3.behavior.zoom()
                             graph.addPortToNode(d.id, port);
                         })
                     .text("Add port");
-                d.ports.forEach(function(entry) {
-                    popup.append("li").text("Id: "+entry.id +". Name: "+entry.name);
+                */
+/*                popup.append("p").append("a")
+                    .attr({"xlink:href": "", "ng-Click":"openARNDialog()"})
+                    .on("mousedown", function(){
+                        console.log("Remove resource: "+d.id);
+                        angular.element(document.getElementById('piMgt')).scope().deleteResource(d.id);
+                        })
+                    .text("Remove");
+  */              d.ports.forEach(function(entry) {
+                    popup.append("li").text("Id: "+entry.id +".");
                 });
         }
         });
 
         var portsTest = nodeEnter.append("g")
             .attr("id", "ports").selectAll("g.ports")
-            .data(function(d){ console.log("ADD ports"); console.log(d.ports); return d.ports;});
-
+            .data(function(d){ return d.ports;});
+/*
         portsTest
             .enter().append("rect")
                 .attr("id",function(d){ return d.id;})
@@ -352,7 +428,7 @@ console.log("Change X "+(parentNode.x+d.posx));
                     endState.transitions = [];
                     nodeMouseUp(endState);
             });
-
+*/
         portsTest.exit().remove();
         nodeEnter.attr("transform", function (d) {
             return "translate(" + d.x + "," + d.y + ")";
@@ -533,4 +609,11 @@ console.log(nodes);
        }
    }
 return nodes;
+}
+
+
+function callOperation(nodeId, resType, type){
+    console.log("CALL OPERATION "+type);
+    if(resType === "arn") angular.element(document.getElementById('viNetMgt')).scope().openOperationARNDialog(nodeId, type);
+    else if(resType === "cpe") angular.element(document.getElementById('viNetMgt')).scope().openOperationCPEDialog(nodeId, type);
 }

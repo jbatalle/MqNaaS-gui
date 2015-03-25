@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-md-3">
+        <div class="well">{{networkId}}</span>
+        </div>
+        <hr>
+        <abn-tree tree-data="resourceTree" tree-control="my_tree" on-select="my_tree_handler(branch)"></abn-tree>
+        <hr>
+    </div>
+    <!--/col-->
+    <div class="col-md-9">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>Topology</h4>
+            </div>
+                <topology-complete class="col-md-10 col-lg-offset-1" complete-topology-data="completeTopologyData"></topology-complete>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+    <div class="row">
+        <div class="col-md-12">
+            Network actions, insert flows?
+        </div>
+    </div>
+
+
+</div>

@@ -43,7 +43,7 @@ $(function () {
     /* END Stencil - Images draggables to d3js */
 });
 
-function createElement(type, divPos, data) {
+function createElement(name, type, divPos, data) {
     console.log("Create element " + type + " " + divPos);
     switch (type) {
         case "ofSwitch":
@@ -68,18 +68,19 @@ function createElement(type, divPos, data) {
             createLaptop(divPos);
             break;
         case "arn":
-//            if (jQuery.isEmptyObject(data))
-                createARN(divPos);
-//            else
-//                createARN(divPos, data);
-            showInfoMessage("Element added");
+        case "varn":
+            if (jQuery.isEmptyObject(data))
+                createARN(name, divPos);
+            else
+                createARN(name, divPos, data);
+            //showInfoMessage("Element added");
             break;
         case "cpe":
-//            if (jQuery.isEmptyObject(data))
-                createCPE(divPos);
-//            else
-//                createARN(divPos, data);
-            showInfoMessage("Element added");
+        case "vcpe":
+            if (jQuery.isEmptyObject(data))
+                createCPE(name, divPos);
+            else
+                createCPE(name, divPos, data);
             break;
         default:
             console.log("Element not defined");
@@ -88,17 +89,18 @@ function createElement(type, divPos, data) {
 
 }
 
-function createARN(divPos) {
+function createARN(name, divPos, data) {
+    console.log(data);
     ARN.prototype = new NetworkElement();
     ARN.prototype.constructor = ARN;
-    var name = "arn" + graph.getNodes().length;
+//    var name = "arn" + graph.getNodes().length;
     var arn = new ARN(name);
     console.log(arn);
-    console.log(arn instanceof NetworkElement);
     console.log(arn.getPorts());
     arn.id = name;
     arn.setX(divPos.x);
     arn.setY(divPos.y);
+     if (!jQuery.isEmptyObject(data)) arn.setPorts(data.ports, arn.id);
     //var ports = [{"id": ofSw.id+"1", "name": "ge-0/1", x: (ofSw.x-23), y: (ofSw.x+12), posx: -23, posy: 12, parent: ofSw.id},
     //          {"id": ofSw.id+"2", "name": "ge-2/1", x: (ofSw.x+45), y: (ofSw.y+12), posx: 45, posy: 12, parent: ofSw.id}];
     //ofSw.setPorts(ports);
@@ -106,10 +108,11 @@ function createARN(divPos) {
     graph.addNodewithData(arn);
 }
 
-function createCPE(divPos) {
+function createCPE(name, divPos, data) {
+    console.log(data);
     CPE.prototype = new NetworkElement();
     CPE.prototype.constructor = CPE;
-    var name = "cpe" + graph.getNodes().length;
+//    var name = "cpe" + graph.getNodes().length;
     var cpe = new CPE(name);
     console.log(cpe);
     console.log(cpe instanceof NetworkElement);
@@ -117,6 +120,7 @@ function createCPE(divPos) {
     cpe.id = name;
     cpe.setX(divPos.x);
     cpe.setY(divPos.y);
+    if (!jQuery.isEmptyObject(data)) cpe.setPorts(data.ports, cpe.id);
     //var ports = [{"id": ofSw.id+"1", "name": "ge-0/1", x: (ofSw.x-23), y: (ofSw.x+12), posx: -23, posy: 12, parent: ofSw.id},
     //          {"id": ofSw.id+"2", "name": "ge-2/1", x: (ofSw.x+45), y: (ofSw.y+12), posx: 45, posy: 12, parent: ofSw.id}];
     //ofSw.setPorts(ports);

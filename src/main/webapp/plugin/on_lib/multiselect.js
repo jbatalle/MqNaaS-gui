@@ -1,6 +1,6 @@
 var drag = d3.behavior.drag()
     .on("drag", function (d, i) {
-console.log("Drag");
+
         var link = graph.vis.selectAll("line.link")
                     .data(graph.getLinks());
         
@@ -68,7 +68,7 @@ console.log("drag");
 
             d3.event.sourceEvent.stopPropagation();
         } else{
-console.log("Drag one node");
+
             if(ctrlKey){
                 var selection = d3.selectAll('.selected');
 
@@ -106,11 +106,11 @@ console.log("Dragging Node - Look Ports");
 //                        console.log(d.ports[i]);
                         transform(d.ports[i]);
 console.log(link);
-                        link.filter(function (l) { return l.source === d.ports[i];}).attr("x1", d.ports[i].x).attr("y1", d.ports[i].y);  
-                        link.filter(function (l) { return l.target === d.ports[i]; }).attr("x2", d.ports[i].x).attr("y2", d.ports[i].y);
+//                        link.filter(function (l) { return l.source === d.ports[i];}).attr("x1", d.ports[i].x).attr("y1", d.ports[i].y);  
+//                        link.filter(function (l) { return l.target === d.ports[i]; }).attr("x2", d.ports[i].x).attr("y2", d.ports[i].y);
                     }
-//                    link.filter(function (l) { return l.source === d;}).attr("x1", d.x).attr("y1", d.y);
-//                    link.filter(function (l) { return l.target === d; }).attr("x2", d.x).attr("y2", d.y);
+                    link.filter(function (l) { return l.source === d;}).attr("x1", d.x).attr("y1", d.y);
+                    link.filter(function (l) { return l.target === d; }).attr("x2", d.x).attr("y2", d.y);
                     return "translate(" + [d.x, d.y] + ")";
                 });
             }

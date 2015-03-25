@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('openNaaSApp', ['ngResource', 'ngRoute', 'ngCookies', 'openNaaSApp.services', 'LocalStorageModule', 'cb.x2js', 'ngTable', 'ngDialog'])
+angular.module('openNaaSApp', ['ngResource', 'ngRoute', 'ngCookies', 'openNaaSApp.services', 'LocalStorageModule', 'cb.x2js', 'mgcrea.ngStrap', 'angularBootstrapNavTree', 'smart-table'])
         .config(function (localStorageServiceProvider) {
             localStorageServiceProvider
                     .setPrefix('openNaaSApp')
@@ -14,72 +14,61 @@ angular.module('openNaaSApp', ['ngResource', 'ngRoute', 'ngCookies', 'openNaaSAp
                             templateUrl: 'partials/login.html',
                             controller: 'LoginController'
                         })
-                        .when('/about', {
-                            templateUrl: 'partials/about.html',
-                            controller: 'AboutCtrl'
-                        })
                         .when('/users', {
                             templateUrl: 'partials/users.html',
                             controller: 'UsersController'
                         })
-                        .when('/testMq', {
-                            templateUrl: 'partials/testmq.html',
-                            controller: 'TestMqController'
+                        .when('/home', {
+                            templateUrl: 'partials/sodales/0_home.html',
+                            controller: 'SodalesHomeCtrl'
+                        })
+                        .when('/network', {
+                            templateUrl: 'partials/network/dash.html',
+                            controller: 'networkCtrl'
+                        })
+                        .when('/networkMgt', {
+                            templateUrl: 'partials/network/mgt.html',
+                            controller: 'networkMgtCtrl'
+                        })
+                        .when('/networkResources', {
+                            templateUrl: 'partials/resources/dash.html',
+                            controller: 'resourceCtrl'
+                        })
+                        .when('/networkResources/:id', {
+                            templateUrl: 'partials/resources/mgt.html',
+                            controller: 'resourceMgtCtrl'
+                        })
+                        .when('/options', {
+                            templateUrl: 'partials/options.html',
+                            controller: 'otpionsCtrl'
                         })
                         .when('/history', {
-                            templateUrl: 'partials/history/index.html',
-                            controller: 'HistoryListController'
+                            templateUrl: 'partials/history.html',
+                            controller: 'historyCtrl'
                         })
-                        .when('/createHistory', {
-                            templateUrl: 'partials/history/create.html',
-                            controller: 'HistoryCreateController'
+                        .when('/userMgt', {
+                            templateUrl: 'partials/users.html',
+                            controller: 'UsersController'
                         })
-                        .when('/rootResource', {
-                            templateUrl: 'partials/rootResource/index.html',
-                            controller: 'RootResourceController'
+                
+                
+                
+                
+                        .when('/openaccess/history', {
+                            templateUrl: 'partials/sodales/2_1_openAccess_history.html',
+                            controller: 'SodalesHistoryController'
                         })
-                        .when('/info/:id', {
-                            templateUrl: 'partials/rootResource/info.html',
-                            controller: 'InfoRootResourceController'
-                        })
-                        .when('/listServices/:id', {
-                            templateUrl: 'partials/serviceProvider/info.html',
-                            controller: 'serviceProviderController'
-                        })
-                        .when('/rootResource/create', {
-                            templateUrl: 'partials/rootResource/info.html',
-                            controller: 'CreateRootResourceController'
-                        })
-                        .when('/tree', {
-                            templateUrl: 'partials/tree.html',
-                            controller: 'treeCtrl'
-                        })
-                        .when('/infoResource/:id', {
-                            templateUrl: 'partials/mqnaasResource/info.html',
-                            controller: 'MqNaaSResourceController'
-                        })
-                        .when('/sodales', {
-                            templateUrl: 'partials/sodales/index.html',
-                            controller: 'SodalesController'
-                        })
-                        .when('/sodales_statistics', {
-                            templateUrl: 'partials/sodales/statistics.html',
-                            controller: 'SodalesStatisticsController'
-                        })
-                        .when('/graph', {
-                            templateUrl: 'partials/graph.html'
-                        })
-                        .when('/doAction/:action', {
-                            controller: 'ContentController'
-                        })
-                        .when('/crawler', {
-                            template: " ", // just fire controller
-                            controller: 'CrawlerResourceController',
-                            animation: 'slide'
-                        })
-                        .when('/sodales_oa_dash', {
-                            templateUrl: 'partials/sodales/oa_dash.html',
+                        .when('/openaccess/vimgt', {
+                            templateUrl: 'partials/sodales/2_0_openAccess.html',
                             controller: 'SodalesOpenaccessDashCtrl'
+                        })
+                        .when('/openaccess/vicreation', {
+                            templateUrl: 'partials/createVI/index.html',
+                            controller: 'listVIController'
+                        })
+                        .when('/mgt', {
+                            templateUrl: 'partials/sodales/0_1_mgt_pi.html',
+                            controller: 'sodalesPiMgtCtrl'
                         })
                         .when('/viList', {
                             templateUrl: 'partials/createVI/index.html',
@@ -89,9 +78,21 @@ angular.module('openNaaSApp', ['ngResource', 'ngRoute', 'ngCookies', 'openNaaSAp
                             templateUrl: 'partials/createVI/editor.html',
                             controller: 'editVIController'
                         })
+                        .when('/spInfo', {
+                            templateUrl: 'partials/sodales/sp/spInfo.html',
+                            controller: 'spController'
+                        })
+                        .when('/spVIInfo/:id', {
+                            templateUrl: 'partials/sodales/sp/spVIInfo.html',
+                            controller: 'spVIController'
+                        })
+                        .when('/spStats/:id', {
+                            templateUrl: 'partials/sodales/sp/spStats.html',
+                            controller: 'spStatsController'
+                        })
                         .otherwise({
-                            templateUrl: 'partials/index.html',
-                            //controller: IndexController
+                            templateUrl: 'partials/0_dashboard.html',
+                            controller: 'dashboardCtrl'
                         });
 
                 $locationProvider.hashPrefix('!');
@@ -146,6 +147,7 @@ angular.module('openNaaSApp', ['ngResource', 'ngRoute', 'ngCookies', 'openNaaSAp
     $rootScope
             .$on('$viewContentLoaded', function () {
                 delete $rootScope.error;
+        delete $rootScope.info;
             });
 
     $rootScope.hasRole = function (role) {
@@ -165,12 +167,12 @@ angular.module('openNaaSApp', ['ngResource', 'ngRoute', 'ngCookies', 'openNaaSAp
         delete $rootScope.user;
         delete $rootScope.authToken;
         $cookieStore.remove('authToken');
-        $location.path("/login");
+//        $location.path("/login");
     };
 
     /* Try getting valid user from cookie or go to login page */
     var originalPath = $location.path();
-    $location.path("/login");
+//    $location.path("/login");
     var authToken = $cookieStore.get('authToken');
     if (authToken !== undefined) {
         $rootScope.authToken = authToken;

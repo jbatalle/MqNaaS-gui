@@ -1,0 +1,29 @@
+<table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+    <thead>
+        <tr>
+            <th st-sort="firstName">Id</th>
+            <th st-sort="lastName">Endpoint</th>
+            <th st-sort="birthDate">Action</th>
+        </tr>
+        <tr>
+            <th colspan="5">
+                <input st-search="" class="form-control" placeholder="global search ..." type="text" />
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="row in displayedCollection">
+            {{row}}
+            <td>{{row}}</td>
+            <td>{{row.lastName}}</td>
+            <td>
+                <button type="button" ng-click="selectNetwork(row)" class="btn btn-sm btn-danger" ng-disabled="row === networkId">Select</button>
+                <button type="button" ng-click="selectNetwork(row)" class="btn btn-sm btn-danger" ng-disabled="row !== networkId">Unselect</button>
+                <button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove-circle"></i>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<a title="Add Widget" data-toggle="modal" ng-click="showCreateModal()"><span class="glyphicon glyphicon-plus-sign"></span> Add Network</a>

@@ -1,0 +1,106 @@
+<div class="row">
+    <div class="col-md-5">
+        <div class="well">{{resourceId}}</div>
+        <hr>
+        <strong>DPID:</strong> {{resourceInfo.externalId}}
+        <br/>
+        <strong>Type:</strong> {{resourceInfo.type}}
+        <hr> Ports
+        <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+            <thead>
+                <tr>
+                    <th st-sort="firstName">Id</th>
+                    <th st-sort="lastName">type</th>
+                    <th st-sort="birthDate">externalId</th>
+                    <th st-sort="birthDate">externalName</th>
+                </tr>
+                <tr>
+                    <th colspan="5">
+                        <input st-search="" class="form-control" placeholder="global search ..." type="text" />
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in resourcePorts">
+                    <td>{{row.id}}</td>
+                    <td>{{row.type}}</td>
+                    <td>{{row.externalId}}</td>
+                    <td>{{row.externalName}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--/col-->
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>Actions</h4>
+            </div>
+            <div class="panel-body">
+                Insert specific flow form
+                <form>
+                    Name:
+                    <input type="text" ng-model="flow.name" />
+                    <br/> DPID:
+                    <input type="text" ng-model="flow.dpid" placeholder="{{resourceInfo.externalId}}" value="{{resourceInfo.externalId}}" />
+                    <br/> Ingress Port:
+                    <input type="text" ng-model="flow.ingressPort" />
+                    <br/> Priority:
+                    <input type="text" ng-model="flow.priority" />
+                    <br/> EtherType:
+                    <input type="text" ng-model="flow.etherType" />
+                    <br/> Action:
+                    <input type="text" ng-model="flow.actions" />
+                    <br/>
+                    <input type="submit" ng-click="insertFlow(flow)" value="Insert" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-md-11">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>Flows</h4>
+                </div>
+                <div class="panel-body">
+                    <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th st-sort="firstName">Id</th>
+                                <th st-sort="lastName">Node</th>
+                                <th st-sort="lastName">Priority</th>
+                                <th st-sort="birthDate">Ingress Port</th>
+                                <th st-sort="birthDate">EtherType</th>
+                                <th st-sort="birthDate">OF Actions</th>
+                                <th st-sort="birthDate">Action</th>
+                            </tr>
+                            <tr>
+                                <th colspan="5">
+                                    <input st-search="" class="form-control" placeholder="global search ..." type="text" />
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="row in flowList">
+                                <td>{{row.name}}</td>
+                                <td>{{row.node}}</td>
+                                <td>{{row.priority}}</td>
+                                <td>{{row.ingressPort}}</td>
+                                <td>{{row.etherType}}</td>
+                                <td>{{row.actions}}</td>
+                                <td>
+                                    <button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove-circle"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

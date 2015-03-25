@@ -1,0 +1,25 @@
+<div class="modal" id="addNetworkModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" ng-click="$hide()">&times;</button>
+                        <h4 class="modal-title">Add network</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            Description: <input type="text" ng-model="network.description" /><br/>
+                            Endpoint: <input type="text" ng-model="network.endpoint" placeholder="{{network.endpoint}}" value="{{network.endpoint}}"/><br/>
+                            Type: <input type="text" ng-model="network.type" placeholder="{{network.type}}" value="{{network.type}}"/><br/>
+                            User: <input type="text" ng-model="network.user" /><br/>
+                            Password: <input type="text" ng-model="network.password" /><br/>
+                            <input type="submit" ng-click="createNetwork(network)" value="Insert" />
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" ng-click="$hide()">Close</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dalog -->
+        </div>

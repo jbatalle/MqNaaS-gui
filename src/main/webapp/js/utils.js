@@ -16,7 +16,15 @@ function IsJsonString(str) {
 function checkIfIsArray(possibleArray) {
     if (possibleArray instanceof Array) {
         return possibleArray;
+    } else if(possibleArray===undefined){
+        return;
     } else {
         return [possibleArray];
     }
+}
+
+function generateUrl(action1, resource, action2) {
+    var url;
+    url = action1 + "/" + resource + "/" + action2;
+    return url;
 }
