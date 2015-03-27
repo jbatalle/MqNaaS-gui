@@ -38,9 +38,6 @@ public class ProxyServlet extends HttpServlet {
         //  Create Get request dynamically to remote server
         String url = "http://ipaddress:port/contextpath" + request.getAttribute("uri") + "?" + request.getQueryString();
         url = baseUrl + request.getAttribute("path");//recevie /mqnaas/IRootResourceProvider
-        logger.error("URL: "+url);
-        System.out.println("\nURIS : " + request.getPathInfo());
-        System.out.println("\nURIS : " + request.getQueryString());
         if( request.getQueryString() != null ){
             url = url + "?" + request.getQueryString();
         }
@@ -76,14 +73,13 @@ public class ProxyServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        logger.error("MEthod Req: PUT");
+        logger.error("MEthod Req: POST");
         //  Create Post request dynamically to remote server
         String url = "http://ipaddress:port/contextpath" + request.getAttribute("uri");
         url = baseUrl + request.getAttribute("path");//recevie /mqnaas/IRootResourceProvider
         if( request.getQueryString() != null ){
             url = url + "?" + request.getQueryString();
         }
-logger.error("URL: "+url);
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
@@ -139,7 +135,6 @@ logger.error("URL: "+url);
         //  Create Post request dynamically to remote server
         String url = "http://ipaddress:port/contextpath" + request.getAttribute("uri");
         url = baseUrl + request.getAttribute("path");//recevie /mqnaas/IRootResourceProvider
-logger.error("URL: "+url);
         if( request.getQueryString() != null ){
             url = url + "?" + request.getQueryString();
         }
@@ -199,7 +194,6 @@ logger.error("URL: "+url);
         //  Create Get request dynamically to remote server
         String url = "http://ipaddress:port/contextpath" + request.getAttribute("uri") + "?" + request.getQueryString();
         url = baseUrl + request.getAttribute("path");//recevie /mqnaas/IRootResourceProvider
-        logger.error("URL: "+url);
         if( request.getQueryString() != null ){
             url = url + "?" + request.getQueryString();
         }
