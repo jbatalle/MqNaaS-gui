@@ -40,7 +40,7 @@ angular.module('openNaaSApp', ['ngResource', 'ngRoute', 'ngCookies', 'openNaaSAp
                         })
                         .when('/options', {
                             templateUrl: 'partials/options.html',
-                            controller: 'otpionsCtrl'
+                            controller: 'optionsCtrl'
                         })
                         .when('/history', {
                             templateUrl: 'partials/history.html',

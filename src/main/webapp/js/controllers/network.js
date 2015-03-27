@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('openNaaSApp')
-.controller('networkCtrl', function ($scope, $rootScope, MqNaaSResourceService, $routeParams, localStorageService, RootResourceService, $modal) {
+.controller('networkCtrl', function ($scope, $rootScope, MqNaaSResourceService, $routeParams, localStorageService, RootResourceService, $modal, $interval) {
     var url = "";
     $scope.network = {};
     $scope.network.endpoint = "http://dev.ofertie.i2cat.net:8080";
@@ -17,7 +17,11 @@ angular.module('openNaaSApp')
             $scope.rowCollection = $scope.networks;
         });
     }
-    $scope.getNetworkList();
+    var promise = $interval(function(){
+	$scope.getNetworkList();		
+    }, 2000);
+
+//    $scope.getNetworkList();
 //    $rootScope.networkId = "Network-odl-2";
     
     $scope.selectNetwork = function(networkId){
@@ -45,12 +49,18 @@ angular.module('openNaaSApp')
     createModal.$promise.then(createModal.show);
   };
 
+	$scope.$on("$destroy", function () {
+                if (promise) {
+                    $interval.cancel(promise);
+                }
+            });
+
     
 }).controller('networkMgtCtrl', function ($scope, $rootScope, MqNaaSResourceService, $routeParams, localStorageService, RootResourceService) {
     var url = "";
-     $scope.my_tree =  {};
+    $scope.my_tree =  {};
     $scope.resourceTree = [];
-    //$rootScope.networkResource;
+    if(!$rootScope.networkId) {window.location = "#!/network"; return}
 //    $rootScope.networkId = "Network-odl-2";
     console.log($rootScope.networkId);
     $scope.nodes = [];

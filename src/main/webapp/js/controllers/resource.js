@@ -3,6 +3,7 @@
 angular.module('openNaaSApp')
     .controller('resourceCtrl', function ($scope, $rootScope, MqNaaSResourceService, $routeParams, localStorageService, RootResourceService, $interval) {
         var url = "";
+var promise;
     if(!$rootScope.networkId) window.location = "#!/network";
     console.log("resources");
         
@@ -16,16 +17,24 @@ angular.module('openNaaSApp')
         MqNaaSResourceService.get(url).then(function (data) {
             $scope.resources = data.resource.resources.resource.filter(function(res){return res.type!== "link"});
         });
-    $scope.update = function(){
+	
+     $scope.update = function(){
         console.log("Selected");
         $scope.resourceId = $scope.resourceId.id;
         console.log($scope.resourceId );
         $scope.getResourceInformation();
-        $interval(function(){
+        promise = $interval(function(){
             $scope.getFlows();
         }, 2000);
     };
     
+ $scope.$on("$destroy", function () {
+                if (promise) {
+                    $interval.cancel(promise);
+                }
+            });
+
+
     
     $scope.getResourceInformation = function () {
             //http://localhost:9000/mqnaas/IRootResourceAdministration/Network-odl-2/IRootResourceProvider/OFSwitch-3/IPortManagement/
@@ -69,6 +78,7 @@ angular.module('openNaaSApp')
     
 }).controller('resourceMgtCtrl', function ($scope, $rootScope, MqNaaSResourceService, $routeParams, localStorageService, RootResourceService, $interval) {
         var url = "";
+	var promise;
     if(!$rootScope.networkId) window.location = "#!/network";
     $scope.resourceId = "";
     
@@ -109,7 +119,7 @@ angular.module('openNaaSApp')
             });
         }
         $scope.getResourceInformation();
-        $interval(function(){
+        promise = $interval(function(){
             $scope.getFlows();
         }, 2000);
     
@@ -184,4 +194,10 @@ angular.module('openNaaSApp')
                 });
             });
         };
+	 $scope.$on("$destroy", function () {
+                if (promise) {
+                    $interval.cancel(promise);
+                }
+            });
+
     });
