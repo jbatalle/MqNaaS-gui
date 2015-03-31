@@ -15,7 +15,6 @@
     "angular-x2js": "~0.1.1",
     "fontawesome": "~4.1.0",
     "d3": "3.5.2",
-    "tree-model-bower": "git://github.com/bikezilla/tree-model-bower",
     "jquery-ui": "1.11.1",
     "angular-strap": "2.1.5",
     "angular-smart-table": "~2.0.1",

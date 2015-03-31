@@ -75,6 +75,16 @@ var promise;
                 console.log(error);
             });
         }
+    $scope.insertFlow = function(flow){
+            console.log(flow);
+            var xml = getOpenFlowFlow(flow.name, flow.dpid, flow.ingressPort, flow.priority, flow.etherType, flow.actions);
+            var url = generateUrl("IRootResourceAdministration", $rootScope.networkId, "IFlowManagement/addFlow");
+            MqNaaSResourceService.put(url, xml).then(function (data) {
+                console.log(data);
+            }, function (error) {
+                console.log(error);
+            });
+        }
     
 }).controller('resourceMgtCtrl', function ($scope, $rootScope, MqNaaSResourceService, $routeParams, localStorageService, RootResourceService, $interval) {
         var url = "";
