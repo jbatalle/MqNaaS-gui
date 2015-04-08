@@ -43,17 +43,22 @@
             <div class="panel-body">
                 Insert specific flow form
                 <form>
-                    Name:
+                    <label class="insertFlow-labels">Name:</label>
                     <input type="text" ng-model="flow.name" />
-                    <br/> DPID:
+                    <br/> 
+                    <label class="insertFlow-labels">DPID:</label>
                     <input type="text" ng-model="flow.dpid" placeholder="{{resourceInfo.externalId}}" value="{{resourceInfo.externalId}}" />
-                    <br/> Ingress Port:
+                    <br/> 
+                    <label class="insertFlow-labels">Ingress Port:</label>
                     <input type="text" ng-model="flow.ingressPort" />
-                    <br/> Priority:
+                    <br/> 
+                    <label class="insertFlow-labels">Priority:</label>
                     <input type="text" ng-model="flow.priority" />
-                    <br/> EtherType:
+                    <br/> 
+                    <label class="insertFlow-labels">EtherType:</label>
                     <input type="text" ng-model="flow.etherType" />
-                    <br/> Action:
+                    <br/> 
+                    <label class="insertFlow-labels">Action:</label>
                     <input type="text" ng-model="flow.actions" />
                     <br/>
                     <input type="submit" ng-click="insertFlow(flow)" value="Insert" />

@@ -55,6 +55,10 @@ angular.module('openNaaSApp')
                 }
             });
 
+    $scope.removeItem = function(id){
+        url = "IRootResourceAdministration/"+id;
+        MqNaaSResourceService.remove(url).then(function () {});
+    }
     
 }).controller('networkMgtCtrl', function ($scope, $rootScope, MqNaaSResourceService, $routeParams, localStorageService, RootResourceService) {
     var url = "";
