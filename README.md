@@ -29,3 +29,7 @@ $ npm install karma --save-dev
 # Install plugins that your project needs:
 $ npm install karma-jasmine karma-chrome-launcher --save-dev
 
+TODO
+------
+* Change js versions to .min
+* VisJs to D3

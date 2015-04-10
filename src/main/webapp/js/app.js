@@ -1,11 +1,15 @@
 'use strict';
 
-angular.module('openNaaSApp', ['ngResource', 'ngRoute', 'ngCookies', 'openNaaSApp.services', 'LocalStorageModule', 'cb.x2js', 'mgcrea.ngStrap', 'angularBootstrapNavTree', 'smart-table'])
-        .config(function (localStorageServiceProvider) {
+angular.module('openNaaSApp', ['ngResource', 'ngRoute', 'ngCookies', 'openNaaSApp.services', 'LocalStorageModule', 'cb.x2js', 'mgcrea.ngStrap', 'angularBootstrapNavTree', 'smart-table', 'ui.router.state', 'ncy-angular-breadcrumb'])
+        .config(function (localStorageServiceProvider, $breadcrumbProvider) {
             localStorageServiceProvider
                     .setPrefix('openNaaSApp')
                     .setStorageType('sessionStorage')
                     .setNotify(true, true);
+            $breadcrumbProvider.setOptions({
+              prefixStateName: 'home',
+              template: 'bootstrap2'
+            });
         }).config(
         ['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 
