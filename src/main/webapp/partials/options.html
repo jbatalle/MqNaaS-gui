@@ -10,9 +10,9 @@
                     <div class="panel-body">
                         <div class="table-responsive">
                             <form>
-                                IP: <input name="opt.ip"/>
-                                Port: <input name="opt.port"/>
-                                <button ng-click="update(opt)">Update</button>
+                                IP: <input name="options.ip" ng-model="options.ip"/>
+                                Port: <input name="options.port" ng-model="options.port"/>
+                                <button ng-click="update(options)">Update</button>
                             </form>
                         </div>
                     </div>

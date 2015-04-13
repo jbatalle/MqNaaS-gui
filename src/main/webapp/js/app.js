@@ -66,8 +66,8 @@ angular.module('openNaaSApp', ['ngResource', 'ngRoute', 'ngCookies', 'openNaaSAp
                 })
                 .state("history", {
                     url: "/history",
-                    templateUrl: 'partials/options.html',
-                    controller: 'optionsCtrl'
+                    templateUrl: 'partials/history.html',
+                    controller: 'historyCtrl'
                 })
             .state("userMgt", {
                     url: "/userMgt",
@@ -90,8 +90,8 @@ angular.module('openNaaSApp', ['ngResource', 'ngRoute', 'ngCookies', 'openNaaSAp
                         'responseError': function (rejection) {
                             var status = rejection.status;
                             var config = rejection.config;
-                            var method = config.method;
-                            var url = config.url;
+                            //var method = config.method;
+                            //var url = config.url;
 
                             if (status == 401) {
                                 $location.path("/login");
