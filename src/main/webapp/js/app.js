@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('openNaaSApp', ['ngResource', 'ngRoute', 'ngCookies', 'openNaaSApp.services', 'LocalStorageModule', 'cb.x2js', 'mgcrea.ngStrap', 'angularBootstrapNavTree', 'smart-table', 'ui.router.state', 'ncy-angular-breadcrumb'])
+angular.module('openNaaSApp', ['ngResource', 'ngRoute', 'ngCookies', 'openNaaSApp.services', 'LocalStorageModule', 'cb.x2js', 'mgcrea.ngStrap', 'angularBootstrapNavTree', 'smart-table', 'ui.router', 'ncy-angular-breadcrumb'])
         .config(function (localStorageServiceProvider, $breadcrumbProvider) {
             localStorageServiceProvider
                     .setPrefix('openNaaSApp')
@@ -8,99 +8,81 @@ angular.module('openNaaSApp', ['ngResource', 'ngRoute', 'ngCookies', 'openNaaSAp
                     .setNotify(true, true);
             $breadcrumbProvider.setOptions({
               prefixStateName: 'home',
-              template: 'bootstrap2'
+              template: 'bootstrap3'
             });
         }).config(
-        ['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
+        ['$stateProvider', '$routeProvider', '$locationProvider', '$httpProvider', '$urlRouterProvider', function ($stateProvider, $routeProvider, $locationProvider, $httpProvider, $urlRouterProvider, $rootScope) {
 
-                $routeProvider
-                        .when('/login', {
-                            templateUrl: 'partials/login.html',
-                            controller: 'LoginController'
-                        })
-                        .when('/users', {
-                            templateUrl: 'partials/users.html',
-                            controller: 'UsersController'
-                        })
-                        .when('/home', {
-                            templateUrl: 'partials/sodales/0_home.html',
-                            controller: 'SodalesHomeCtrl'
-                        })
-                        .when('/network', {
-                            templateUrl: 'partials/network/dash.html',
-                            controller: 'networkCtrl'
-                        })
-                        .when('/networkMgt', {
-                            templateUrl: 'partials/network/mgt.html',
-                            controller: 'networkMgtCtrl'
-                        })
-                        .when('/networkResources', {
-                            templateUrl: 'partials/resources/dash.html',
-                            controller: 'resourceCtrl'
-                        })
-                        .when('/networkResources/:id', {
-                            templateUrl: 'partials/resources/mgt.html',
-                            controller: 'resourceMgtCtrl'
-                        })
-                        .when('/options', {
-                            templateUrl: 'partials/options.html',
-                            controller: 'optionsCtrl'
-                        })
-                        .when('/history', {
-                            templateUrl: 'partials/history.html',
-                            controller: 'historyCtrl'
-                        })
-                        .when('/userMgt', {
-                            templateUrl: 'partials/users.html',
-                            controller: 'UsersController'
-                        })
-                
-                
-                
-                
-                        .when('/openaccess/history', {
-                            templateUrl: 'partials/sodales/2_1_openAccess_history.html',
-                            controller: 'SodalesHistoryController'
-                        })
-                        .when('/openaccess/vimgt', {
-                            templateUrl: 'partials/sodales/2_0_openAccess.html',
-                            controller: 'SodalesOpenaccessDashCtrl'
-                        })
-                        .when('/openaccess/vicreation', {
-                            templateUrl: 'partials/createVI/index.html',
-                            controller: 'listVIController'
-                        })
-                        .when('/mgt', {
-                            templateUrl: 'partials/sodales/0_1_mgt_pi.html',
-                            controller: 'sodalesPiMgtCtrl'
-                        })
-                        .when('/viList', {
-                            templateUrl: 'partials/createVI/index.html',
-                            controller: 'listVIController'
-                        })
-                        .when('/editVIRequest/:id', {
-                            templateUrl: 'partials/createVI/editor.html',
-                            controller: 'editVIController'
-                        })
-                        .when('/spInfo', {
-                            templateUrl: 'partials/sodales/sp/spInfo.html',
-                            controller: 'spController'
-                        })
-                        .when('/spVIInfo/:id', {
-                            templateUrl: 'partials/sodales/sp/spVIInfo.html',
-                            controller: 'spVIController'
-                        })
-                        .when('/spStats/:id', {
-                            templateUrl: 'partials/sodales/sp/spStats.html',
-                            controller: 'spStatsController'
-                        })
-                        .otherwise({
-                            templateUrl: 'partials/0_dashboard.html',
-                            controller: 'dashboardCtrl'
-                        });
+            $stateProvider
+                .state('home', {
+                    url: '/home',
+                    templateUrl: 'partials/0_dashboard.html',
+                    ncyBreadcrumb: {
+                      label: 'Home'
+                    }
+                  })
+                .state("network", {
+                    url: "/network",
+                    templateUrl: 'partials/network/dash.html',
+                    controller: 'networkCtrl',
+                    ncyBreadcrumb: {
+                          label: 'networks',
+                            parent: 'home'
+                        }
+                })
+                .state("networkMgt", {
+                    url: "/networkMgt",
+                    templateUrl: 'partials/network/mgt.html',
+                    controller: 'networkMgtCtrl',
+                    ncyBreadcrumb: {
+                      label: '{{networkId}}',
+                        parent: 'network'
+                    }
+                })
+                .state("login", {
+                    url: "/login",
+                    templateUrl: 'partials/login.html',
+                    controller: 'LoginController'
+                })
+                .state("users", {
+                    url: "/users",
+                    templateUrl: 'partials/users.html',
+                    controller: 'UsersController'
+                })
+                .state("networkResources", {
+                    url: "/networkResources",
+                    templateUrl: 'partials/resources/dash.html',
+                    controller: 'resourceCtrl'
+                })
+                .state("networkResources/:id", {
+                    url: "/networkResources/:id",
+                    templateUrl: 'partials/resources/mgt.html',
+                    controller: 'resourceMgtCtrl'
+                })
+                .state("options", {
+                    url: "/options",
+                    templateUrl: 'partials/options.html',
+                    controller: 'optionsCtrl'
+                })
+                .state("history", {
+                    url: "/history",
+                    templateUrl: 'partials/options.html',
+                    controller: 'optionsCtrl'
+                })
+            .state("userMgt", {
+                    url: "/userMgt",
+                    templateUrl: 'partials/users.html',
+                    controller: 'UsersController'
+                })
+            ;
+            
+            $urlRouterProvider.otherwise('/home');
+            
+            /*
+                        
 
                 $locationProvider.hashPrefix('!');
-
+*/
                 /* Register error provider that shows message on failed requests or redirects to login page on
                  * unauthenticated requests */
                 $httpProvider.interceptors.push(function ($q, $rootScope, $location) {
