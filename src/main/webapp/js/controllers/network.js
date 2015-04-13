@@ -18,7 +18,7 @@ angular.module('openNaaSApp')
         });
     }
     var promise = $interval(function(){
-	$scope.getNetworkList();		
+	   $scope.getNetworkList();		
     }, 2000);
 
 //    $scope.getNetworkList();
@@ -26,11 +26,10 @@ angular.module('openNaaSApp')
     
     $scope.selectNetwork = function(networkId){
         $rootScope.networkId = networkId;
-        window.location = "#!/networkMgt";
+        window.location = "#/networkMgt";
     }
     
     $scope.createNetwork = function(network){
-        console.log(network);
         var xmlNetwork = getNetwork(network.type, network.endpoint, network.user, network.password);
 //        var xmlNetwork = getNetwork("odl", "http://dev.ofertie.i2cat.net:8180", "admin", "admin");
         var json = xmlNetwork;
@@ -44,24 +43,36 @@ angular.module('openNaaSApp')
     $scope.rowCollection = [];
 
     var createModal = $modal({scope: $scope, template: 'partials/network/modalCreateNetwork.html', show: false});
-  // Show when some event occurs (use $promise property to ensure the template has been loaded)
-  $scope.showCreateModal = function() {
-    createModal.$promise.then(createModal.show);
-  };
+    // Show when some event occurs (use $promise property to ensure the template has been loaded)
+    $scope.showCreateModal = function() {
+        createModal.$promise.then(createModal.show);
+    };
 
 	$scope.$on("$destroy", function () {
-                if (promise) {
-                    $interval.cancel(promise);
-                }
-            });
+        if (promise) {
+            $interval.cancel(promise);
+        }
+    });
 
-    $scope.removeItem = function(id){
+    $scope.deleteDialog = function(id){
+        $scope.itemToDeleteId = id;
+            $modal({
+                    title: "Are you sure you want to delete this item?",
+                    template: "partials/network/modalRemoveResource.html",
+                    show: true,
+                    scope: $scope,
+                });
+        
+    }
+    $scope.deleteItem = function (id) {
         url = "IRootResourceAdministration/"+id;
         MqNaaSResourceService.remove(url).then(function () {});
-    }
+        this.$hide();
+    };
     
 }).controller('networkMgtCtrl', function ($scope, $rootScope, MqNaaSResourceService, $routeParams, localStorageService, RootResourceService) {
     var url = "";
+    //$scope.networkId = $rootScope.networkId;
     $scope.my_tree =  {};
     $scope.resourceTree = [];
     if(!$rootScope.networkId) {window.location = "#!/network"; return}
@@ -75,22 +86,24 @@ angular.module('openNaaSApp')
         $scope.output = "You selected: " + branch.id;
     };
     $scope.ui_handler = function (uid, type) {
-            var selected;
-            console.log(uid + " " + type);
-            if (type === "pop") {
-                $scope.tree.forEach(function (entry) {
-                    console.log(entry);
-                    if (entry.uid === uid) {
-                        selected = entry;
-                        //$scope.tree.expand_branch();//not working...
-                        $scope.my_tree_handler(selected);
-                    }
-                });
-            }
-        };
+        var selected;
+        console.log(uid + " " + type);
+        if (type === "pop") {
+            $scope.tree.forEach(function (entry) {
+                console.log(entry);
+                if (entry.uid === uid) {
+                    selected = entry;
+                    //$scope.tree.expand_branch();//not working...
+                    $scope.my_tree_handler(selected);
+                }
+            });
+        }
+    };
+    
     $scope.test = function(){
         console.log("TEST...........................::");
     }
+    
     $scope.generateGraph = function(){
         console.log("generate");
         data.nodes = [];
