@@ -28,8 +28,7 @@ public class MqNaaSResource {
     @Path("/{res1:.*}")
     public @ResponseBody
     String get(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, RestServiceException, ServletException {
-        this.logger.info("GET()");
-        logger.info("URI: " + (String) request.getAttribute("uri"));
+        logger.debug("URI: " + (String) request.getAttribute("uri"));
         HttpServletRequest req = (HttpServletRequest) request;
         request.setAttribute("uri", req.getRequestURI().substring(req.getContextPath().length()));
         request.setAttribute("path", request.getPathInfo());
@@ -55,7 +54,7 @@ public class MqNaaSResource {
     @Path("/{res1:.*}")
     public @ResponseBody
     void put(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, RestServiceException, ServletException {
-        this.logger.info("PUT() ");
+        this.logger.debug("PUT() ");
 
         String body = "";
         StringBuilder stringBuilder = new StringBuilder();
@@ -85,8 +84,8 @@ public class MqNaaSResource {
         }
         body = stringBuilder.toString();
 
-        logger.info("URI: " + (String) request.getAttribute("uri"));
-        logger.info("Object: " + body);
+        logger.debug("URI: " + (String) request.getAttribute("uri"));
+        logger.debug("Object: " + body);
         HttpServletRequest req = (HttpServletRequest) request;
         request.setAttribute("uri", req.getRequestURI().substring(req.getContextPath().length()));
         request.setAttribute("path", request.getPathInfo());
@@ -100,7 +99,7 @@ public class MqNaaSResource {
     @DELETE
     @Path("/{res1:.*}")
     public void delete(@Context HttpServletRequest request, @Context HttpServletResponse response) throws IOException, RestServiceException, ServletException {
-        this.logger.info("DELETE() URI: " + (String) request.getAttribute("uri"));
+        this.logger.debug("DELETE() URI: " + (String) request.getAttribute("uri"));
         HttpServletRequest req = (HttpServletRequest) request;
         request.setAttribute("uri", req.getRequestURI().substring(req.getContextPath().length()));
         request.setAttribute("path", request.getPathInfo());

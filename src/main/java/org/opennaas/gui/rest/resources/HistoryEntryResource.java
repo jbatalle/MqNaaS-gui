@@ -45,7 +45,7 @@ public class HistoryEntryResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String list() throws JsonGenerationException, JsonMappingException, IOException {
-        this.logger.info("list()");
+        this.logger.debug("list()");
 
         ObjectWriter viewWriter;
         if (this.isAdmin()) {
@@ -62,7 +62,7 @@ public class HistoryEntryResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
     public HistoryEntry read(@PathParam("id") Long id) {
-        this.logger.info("read(id)");
+        this.logger.debug("read(id)");
 
         HistoryEntry historyEntry = this.historyEntryDao.find(id);
         if (historyEntry == null) {
@@ -75,7 +75,7 @@ public class HistoryEntryResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public HistoryEntry create(HistoryEntry historyEntry) {
-        this.logger.info("create(): " + historyEntry);
+        this.logger.debug("create(): " + historyEntry);
 
         return this.historyEntryDao.save(historyEntry);
     }
@@ -85,7 +85,7 @@ public class HistoryEntryResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("{id}")
     public HistoryEntry update(@PathParam("id") Long id, HistoryEntry historyEntry) {
-        this.logger.info("update(): " + historyEntry);
+        this.logger.debug("update(): " + historyEntry);
 
         return this.historyEntryDao.save(historyEntry);
     }
@@ -94,7 +94,7 @@ public class HistoryEntryResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
     public void delete(@PathParam("id") Long id) {
-        this.logger.info("delete(id)");
+        this.logger.debug("delete(id)");
 
         this.historyEntryDao.delete(id);
     }

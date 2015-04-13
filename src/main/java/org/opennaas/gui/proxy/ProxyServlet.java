@@ -34,7 +34,6 @@ public class ProxyServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("Method req: GET");
         //  Create Get request dynamically to remote server
         String url = "http://ipaddress:port/contextpath" + request.getAttribute("uri") + "?" + request.getQueryString();
         url = baseUrl + request.getAttribute("path");//recevie /mqnaas/IRootResourceProvider
@@ -51,8 +50,8 @@ public class ProxyServlet extends HttpServlet {
         con.setRequestProperty("User-Agent", USER_AGENT);
 
         int responseCode = con.getResponseCode();
-        System.out.println("\nSending 'GET' request to URL : " + url);
-        System.out.println("Response Code : " + responseCode);
+        logger.debug("\nSending 'GET' request to URL : " + url);
+        logger.debug("Response Code : " + responseCode);
 
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(con.getInputStream()));
@@ -110,9 +109,9 @@ public class ProxyServlet extends HttpServlet {
         wr.close();
 
         int responseCode = con.getResponseCode();
-        System.out.println("\nSending 'POST' request to URL : " + url);
-        System.out.println("Post parameters : " + urlParameters);
-        System.out.println("Response Code : " + responseCode);
+        logger.debug("\nSending 'POST' request to URL : " + url);
+        logger.debug("Post parameters : " + urlParameters);
+        logger.debug("Response Code : " + responseCode);
 
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
         String inputLine;
@@ -169,9 +168,9 @@ public class ProxyServlet extends HttpServlet {
         wr.close();
 
         int responseCode = con.getResponseCode();
-        System.out.println("\nSending 'PUT' request to URL : " + url);
-        System.out.println("Post parameters : " + urlParameters);
-        System.out.println("Response Code : " + responseCode);
+        logger.debug("\nSending 'PUT' request to URL : " + url);
+        logger.debug("Post parameters : " + urlParameters);
+        logger.debug("Response Code : " + responseCode);
 
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
         String inputLine;
@@ -190,7 +189,7 @@ public class ProxyServlet extends HttpServlet {
     
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("Method req: DELETE");
+        logger.debug("Method req: DELETE");
         //  Create Get request dynamically to remote server
         String url = "http://ipaddress:port/contextpath" + request.getAttribute("uri") + "?" + request.getQueryString();
         url = baseUrl + request.getAttribute("path");//recevie /mqnaas/IRootResourceProvider
@@ -207,8 +206,8 @@ public class ProxyServlet extends HttpServlet {
         con.setRequestProperty("User-Agent", USER_AGENT);
 
         int responseCode = con.getResponseCode();
-        System.out.println("\nSending 'DELETE' request to URL : " + url);
-        System.out.println("Response Code : " + responseCode);
+        logger.debug("\nSending 'DELETE' request to URL : " + url);
+        logger.debug("Response Code : " + responseCode);
 
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(con.getInputStream()));
